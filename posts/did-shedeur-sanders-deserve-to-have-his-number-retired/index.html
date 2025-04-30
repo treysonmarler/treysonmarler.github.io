@@ -213,21 +213,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">"Completion Percentage"</span>, </span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">"Passing Yards"</span>, </span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"Where Do Shedeur Sanders' Passing Numbers Rank in Colorado History?"</span>, </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">"His numbers are good, but not great. There are 4 quarterbacks that threw for more yards."</span>, </span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Source: Sports Reference | By: Treyson Marler"</span> </span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">xmin =</span> <span class="dv">50</span>, <span class="at">xmax =</span> <span class="cn">Inf</span>,</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymin =</span> <span class="dv">7200</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>) <span class="sc">+</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span> <span class="dv">90</span>, <span class="at">y=</span> <span class="dv">9000</span>, <span class="at">label=</span><span class="st">"Top Quarterback Play"</span>), <span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), </span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>     <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">"His numbers are good, but not great. There are 4 quarterbacks that threw for more yards. Sefo Liufau is the </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">Colorado leader in passing yards, and at the top of the scatter plot."</span>, </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Source: Sports Reference | By: Treyson Marler"</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">xmin =</span> <span class="dv">50</span>, <span class="at">xmax =</span> <span class="cn">Inf</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymin =</span> <span class="dv">7200</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>) <span class="sc">+</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span> <span class="dv">90</span>, <span class="at">y=</span> <span class="dv">9000</span>, <span class="at">label=</span><span class="st">"Top Quarterback Play"</span>), <span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>     <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -259,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">"Week of Season"</span>, </span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">"Total Passing Yards"</span>, </span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"How Does He Compare to the Other Top CU Quarterbacks Week to Week?"</span>, </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"The Coaches' Son was Good, But Did Not Excel above the Field."</span>, </span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">"Although Sanders didn't peak at the top, he was the most consistent quarterback among the Colorado greats. "</span>, </span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Source: Sports Reference | By Treyson Marler"</span></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
@@ -282,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>One big difference between Sanders and the quarterbacks that ranked above him was the length of time playing at Colorado.</p>
 <p>Sanders started for 2 seasons, the other players started at least 3.</p>
-<p>When compared game by game with these other elite players, Shedeur produced more consistent numbers on a week to week basis. However, the numbers still don’t pop off the page and show him being far ahead of any of the other quarterbacks that came before him.</p>
+<p>When compared game by game with these other elite players, Shedeur produced more consistent numbers on a week to week basis. However, the numbers still aren’t jaw dropping and showing him succeeding at a rate that is higher than the players that came before him.</p>
 <p>So he had his number retired before any other quarterback, but his numbers don’t pop off the page.</p>
 <p>Certainly he at least won, right?</p>
 <div class="cell">
@@ -302,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct =</span> <span class="st">"Win Percentage"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"His Offensive Numbers Aren't Incredible, Did He at Least Win?"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"His Passing Numbers Aren't the Best, Nor Did He Win at a High Rate. "</span>,</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The best team Shedeur Sanders was the quarterback of was 11th in Colorado history. "</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">tab_style</span>(</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
@@ -331,23 +332,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Year <span class="sc">==</span> <span class="st">"2024"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fdyxxxxpzz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fdyxxxxpzz table {
+<div id="umrpmbnycr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#umrpmbnycr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fdyxxxxpzz thead, #fdyxxxxpzz tbody, #fdyxxxxpzz tfoot, #fdyxxxxpzz tr, #fdyxxxxpzz td, #fdyxxxxpzz th {
+#umrpmbnycr thead, #umrpmbnycr tbody, #umrpmbnycr tfoot, #umrpmbnycr tr, #umrpmbnycr td, #umrpmbnycr th {
   border-style: none;
 }
 
-#fdyxxxxpzz p {
+#umrpmbnycr p {
   margin: 0;
   padding: 0;
 }
 
-#fdyxxxxpzz .gt_table {
+#umrpmbnycr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -373,12 +374,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_caption {
+#umrpmbnycr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fdyxxxxpzz .gt_title {
+#umrpmbnycr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -390,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#fdyxxxxpzz .gt_subtitle {
+#umrpmbnycr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -402,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#fdyxxxxpzz .gt_heading {
+#umrpmbnycr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -414,13 +415,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_bottom_border {
+#umrpmbnycr .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_col_headings {
+#umrpmbnycr .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -435,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_col_heading {
+#umrpmbnycr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -455,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fdyxxxxpzz .gt_column_spanner_outer {
+#umrpmbnycr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -467,15 +468,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#fdyxxxxpzz .gt_column_spanner_outer:first-child {
+#umrpmbnycr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fdyxxxxpzz .gt_column_spanner_outer:last-child {
+#umrpmbnycr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fdyxxxxpzz .gt_column_spanner {
+#umrpmbnycr .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -487,11 +488,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#fdyxxxxpzz .gt_spanner_row {
+#umrpmbnycr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fdyxxxxpzz .gt_group_heading {
+#umrpmbnycr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -517,7 +518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#fdyxxxxpzz .gt_empty_group_heading {
+#umrpmbnycr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -532,15 +533,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#fdyxxxxpzz .gt_from_md > :first-child {
+#umrpmbnycr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fdyxxxxpzz .gt_from_md > :last-child {
+#umrpmbnycr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fdyxxxxpzz .gt_row {
+#umrpmbnycr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -559,7 +560,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fdyxxxxpzz .gt_stub {
+#umrpmbnycr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -572,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fdyxxxxpzz .gt_stub_row_group {
+#umrpmbnycr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -586,15 +587,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#fdyxxxxpzz .gt_row_group_first td {
+#umrpmbnycr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fdyxxxxpzz .gt_row_group_first th {
+#umrpmbnycr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fdyxxxxpzz .gt_summary_row {
+#umrpmbnycr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -604,16 +605,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fdyxxxxpzz .gt_first_summary_row {
+#umrpmbnycr .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_first_summary_row.thick {
+#umrpmbnycr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fdyxxxxpzz .gt_last_summary_row {
+#umrpmbnycr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -623,7 +624,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_grand_summary_row {
+#umrpmbnycr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -633,7 +634,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fdyxxxxpzz .gt_first_grand_summary_row {
+#umrpmbnycr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -643,7 +644,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_last_grand_summary_row_top {
+#umrpmbnycr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -653,11 +654,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_striped {
+#umrpmbnycr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fdyxxxxpzz .gt_table_body {
+#umrpmbnycr .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -666,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_footnotes {
+#umrpmbnycr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -680,7 +681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_footnote {
+#umrpmbnycr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -689,7 +690,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fdyxxxxpzz .gt_sourcenotes {
+#umrpmbnycr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -703,7 +704,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fdyxxxxpzz .gt_sourcenote {
+#umrpmbnycr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -711,72 +712,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fdyxxxxpzz .gt_left {
+#umrpmbnycr .gt_left {
   text-align: left;
 }
 
-#fdyxxxxpzz .gt_center {
+#umrpmbnycr .gt_center {
   text-align: center;
 }
 
-#fdyxxxxpzz .gt_right {
+#umrpmbnycr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fdyxxxxpzz .gt_font_normal {
+#umrpmbnycr .gt_font_normal {
   font-weight: normal;
 }
 
-#fdyxxxxpzz .gt_font_bold {
+#umrpmbnycr .gt_font_bold {
   font-weight: bold;
 }
 
-#fdyxxxxpzz .gt_font_italic {
+#umrpmbnycr .gt_font_italic {
   font-style: italic;
 }
 
-#fdyxxxxpzz .gt_super {
+#umrpmbnycr .gt_super {
   font-size: 65%;
 }
 
-#fdyxxxxpzz .gt_footnote_marks {
+#umrpmbnycr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fdyxxxxpzz .gt_asterisk {
+#umrpmbnycr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fdyxxxxpzz .gt_indent_1 {
+#umrpmbnycr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fdyxxxxpzz .gt_indent_2 {
+#umrpmbnycr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fdyxxxxpzz .gt_indent_3 {
+#umrpmbnycr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fdyxxxxpzz .gt_indent_4 {
+#umrpmbnycr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fdyxxxxpzz .gt_indent_5 {
+#umrpmbnycr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fdyxxxxpzz .katex-display {
+#umrpmbnycr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fdyxxxxpzz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#umrpmbnycr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -784,7 +785,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="6" class="gt_heading gt_title gt_font_normal" style="text-align: left; color: #000000; font-weight: bold;">His Offensive Numbers Aren't Incredible, Did He at Least Win?</th>
+<th colspan="6" class="gt_heading gt_title gt_font_normal" style="text-align: left; color: #000000; font-weight: bold;">His Passing Numbers Aren't the Best, Nor Did He Win at a High Rate.</th>
 </tr>
 <tr class="odd gt_heading">
 <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="text-align: left; color: #000000;">The best team Shedeur Sanders was the quarterback of was 11th in Colorado history.</th>
