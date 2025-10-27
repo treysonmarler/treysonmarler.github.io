@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Nebraskan News Quiz</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        #quiz-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            width: 90%;
+            max-width: 600px;
+            overflow: hidden;
+        }
+
+        #header {
+            background-color: #d00000; /* Daily Nebraskan Red */
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        #header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        #main-content {
+            padding: 30px;
+        }
+
+        #question-container {
+            margin-bottom: 20px;
+        }
+
+        #question-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        #answer-options {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .option.selected {
+            background-color: #d9e8ff;
+            border-color: #0056b3;
+        }
+
+        #submit-btn {
+            background-color: #0056b3; /* A contrasting blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+
+        #submit-btn:hover {
+            background-color: #003d80;
+        }
+
+        #results-container {
+            text-align: center;
+            padding: 30px;
+        }
+
+        #results-container h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        #score-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: #d00000;
+        }
+
+        #restart-btn {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+         #restart-btn:hover {
+            background-color: #449d44;
+         }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <div id="header">
+            <h1>Daily Nebraskan News Quiz</h1>
+        </div>
+        
+        <div id="quiz-content" class="main-content">
+            <div id="question-container">
+                <p id="question-text">Loading question...</p>
+                <ul id="answer-options">
+                    </ul>
+            </div>
+            <button id="submit-btn">Next Question</button>
+        </div>
+
+        <div id="results-container" class="main-content hidden">
+            <h2>Quiz Complete!</h2>
+            <p id="score-text">Your score: 0 / 5</p>
+            <button id="restart-btn">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. QUIZ DATA ---
+        // The JSON data you requested is embedded here
+        const allQuestions = [
+          {
+            "type": "True/False",
+            "question": "The Bar has been open since 2000.",
+            "answer": "True"
+          },
+          {
+            "type": "True/False",
+            "question": "Seth Regan bought into The Bar when he was 32 years old.",
+            "answer": "False"
+          },
+          {
+            "type": "True/False",
+            "question": "The name 'The Bar' was suggested by Seth Regan's business partner, Gregg List.",
+            "answer": "False"
+          },
+          {
+            "type": "True/False",
+            "question": "Current manager Chloe Best was an accounting major in college.",
+            "answer": "True"
+          },
+          {
+            "type": "True/False",
+            "question": "Seth Regan always loved the nickname 'The bar, The Bar.'",
+            "answer": "False"
+          },
+          {
+            "type": "Multiple Choice",
+            "question": "Who is the current manager of The Bar?",
+            "options": [
+              "Seth Regan",
+              "Gregg List",
+              "Chloe Best",
+              "Lozari"
+            ],
+            "answer": "Chloe Best"
+          },
+          {
+            "type": "Multiple Choice",
+            "question": "According to Seth Regan, what advice does he give to his college-aged staff?",
+            "options": [
+              "Prioritize work experience over classes.",
+              "Avoid the 'bartender life' because it's not conducive to having a family.",
+              "Get school done, but also have fun because these moments don't last forever.",
+              "Focus only on who has the most money and what clothes you wear."
+            ],
+            "answer": "Get school done, but also have fun because these moments don't last forever."
+          },
+          {
+            "type": "Multiple Choice",
+            "question": "How long had Chloe Best worked at The Bar before becoming the manager?",
+            "options": [
+              "Three years",
+              "Eight months",
+              "Two weeks",
+              "She was hired directly as the manager."
+            ],
+            "answer": "Eight months"
+          },
+          {
+            "type": "Multiple Choice",
+            "question": "According to Chloe Best, what makes The Bar unique?",
+            "options": [
+              "It's the cheapest bar in Lincoln.",
+              "It's 'the little crap hole that could'.",
+              "It's everyone's last stop of the night.",
+              "It has a famously easy-going atmosphere."
+            ],
+            "answer": "It's everyone's last stop of the night."
+          },
+          {
+            "type": "Multiple Choice",
+            "question": "Why has Seth Regan started to rely more on managers?",
+            "options": [
+              "He is planning to sell the bar.",
+              "He is focusing on other restaurants he owns.",
+              "He no longer enjoys the bar scene.",
+              "He has grown up, gotten married, and had kids."
+            ],
+            "answer": "He has grown up, gotten married, and had kids."
+          }
+        ];
+
+        // --- 2. GLOBAL VARIABLES ---
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        // --- 3. DOM ELEMENTS ---
+        const quizContentEl = document.getElementById('quiz-content');
+        const resultsContainerEl = document.getElementById('results-container');
+        const questionTextEl = document.getElementById('question-text');
+        const answerOptionsEl = document.getElementById('answer-options');
+        const submitBtn = document.getElementById('submit-btn');
+        const scoreTextEl = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // --- 4. FUNCTIONS ---
+
+        /**
+         * Shuffles an array in place (Fisher-Yates shuffle)
+         * and selects the first 'num' items.
+         */
+        function selectRandomQuestions(arr, num) {
+            let shuffled = [...arr]; // Create a copy
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled.slice(0, num);
+        }
+
+        /**
+         * Loads and displays the current question.
+         */
+        function displayQuestion() {
+            selectedAnswer = null; // Reset selected answer
+            let question = quizQuestions[currentQuestionIndex];
+            questionTextEl.textContent = question.question;
+            answerOptionsEl.innerHTML = ''; // Clear previous options
+
+            let options = [];
+            if (question.type === "True/False") {
+                options = ["True", "False"];
+            } else {
+                options = question.options;
+            }
+
+            options.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option;
+                li.classList.add('option');
+                li.addEventListener('click', () => selectOption(li, option));
+                answerOptionsEl.appendChild(li);
+            });
+
+            // Update button text for the last question
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                submitBtn.textContent = 'Finish Quiz';
+            } else {
+                submitBtn.textContent = 'Next Question';
+            }
+        }
+
+        /**
+         * Handles styling and storing the selected answer.
+         */
+        function selectOption(selectedLi, answer) {
+            // Remove 'selected' class from all options
+            document.querySelectorAll('.option').forEach(li => {
+                li.classList.remove('selected');
+            });
+            // Add 'selected' class to the clicked option
+            selectedLi.classList.add('selected');
+            selectedAnswer = answer;
+        }
+
+        /**
+         * Checks the answer, updates score, and moves to the next question or results.
+         */
+        function handleSubmit() {
+            if (selectedAnswer === null) {
+                alert("Please select an answer!");
+                return;
+            }
+
+            // Check if the answer is correct
+            if (selectedAnswer === quizQuestions[currentQuestionIndex].answer) {
+                score++;
+            }
+
+            // Move to the next question
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < quizQuestions.length) {
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        /**
+         * Displays the final score and hides the quiz.
+         */
+        function showResults() {
+            quizContentEl.classList.add('hidden');
+            resultsContainerEl.classList.remove('hidden');
+            scoreTextEl.textContent = `Your score: ${score} / ${quizQuestions.length}`;
+        }
+
+        /**
+         * Resets the quiz and starts over.
+         */
+        function startQuiz() {
+            quizQuestions = selectRandomQuestions(allQuestions, 5);
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+
+            resultsContainerEl.classList.add('hidden');
+            quizContentEl.classList.remove('hidden');
+            
+            displayQuestion();
+        }
+
+        // --- 5. EVENT LISTENERS ---
+        submitBtn.addEventListener('click', handleSubmit);
+        restartBtn.addEventListener('click', startQuiz);
+
+        // --- 6. INITIALIZE QUIZ ---
+        startQuiz();
+
+    </script>
+</body>
+</html>
