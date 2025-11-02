@@ -9,22 +9,18 @@
         :root {
             --game-width: 400px;
             --game-height: 600px;
-            --herbie-width: 60px;
-            --herbie-height: 50px;
+            --herbie-width: 60px; /* Adjust as needed for your image */
+            --herbie-height: 50px; /* Adjust as needed for your image */
             --obstacle-width: 80px;
             --gap-height: 150px;
             --game-speed: 2px;
             --gravity: 0.3;
             --jump-force: -7;
 
-            /* TODO: REPLACE THESE PLACEHOLDERS
-            Replace 'red' with 'url("herbie.png")'
-            Replace 'grey' with 'url("washer.png")'
-            Replace '#555' with 'url("dryer.png")'
-            */
-            --herbie-img: red; 
-            --washer-img: grey;
-            --dryer-img: #555;
+            --herbie-img: url('https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Herbie_Husker_logo.svg/1200px-Herbie_Husker_logo.svg.png');
+            /* UPDATED: Washer and Dryer images now included */
+            --washer-img: url('https://i.imgur.com/GzByswJ.png'); /* Using the image you provided */
+            --dryer-img: url('https://i.imgur.com/GzByswJ.png'); /* Using the same image for now */
         }
 
         body {
@@ -54,12 +50,11 @@
             position: absolute;
             top: 50%;
             left: 25%;
-            background: var(--herbie-img);
+            background-image: var(--herbie-img);
             background-size: contain;
             background-repeat: no-repeat;
+            background-position: center;
             z-index: 100;
-            /* Placeholder style - remove border-radius if using an image */
-            border-radius: 10px; 
             transition: transform 0.2s;
         }
 
@@ -76,23 +71,27 @@
         .washer {
             /* This is the top obstacle */
             width: 100%;
-            background: var(--washer-img);
-            background-size: cover;
-            border: 2px solid black;
+            background-image: var(--washer-img); /* Use background-image for URLs */
+            background-size: contain; /* Ensure the image fits */
+            background-repeat: no-repeat; /* Prevent tiling */
+            background-position: bottom; /* Position the washer at the bottom of its allocated space */
+            border: 0px solid black; /* Remove border if image has its own */
             box-sizing: border-box;
-            /* Placeholder style */
-            border-bottom: 5px solid #333; 
+            /* Placeholder style - remove or adjust if image has its own top/bottom */
+            /* border-bottom: 5px solid #333; */ 
         }
 
         .dryer {
             /* This is the bottom obstacle */
             width: 100%;
-            background: var(--dryer-img);
-            background-size: cover;
-            border: 2px solid black;
+            background-image: var(--dryer-img); /* Use background-image for URLs */
+            background-size: contain; /* Ensure the image fits */
+            background-repeat: no-repeat; /* Prevent tiling */
+            background-position: top; /* Position the dryer at the top of its allocated space */
+            border: 0px solid black; /* Remove border if image has its own */
             box-sizing: border-box;
-             /* Placeholder style */
-            border-top: 5px solid #333;
+             /* Placeholder style - remove or adjust if image has its own top/bottom */
+            /* border-top: 5px solid #333; */
         }
 
         #flames {
