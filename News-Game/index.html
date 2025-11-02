@@ -32,11 +32,31 @@
             background-color: #70c5ce; /* Sky Blue */
             overflow: hidden; /* Keeps everything inside */
         }
+        
+        /* === NEW CSS === */
+        /* This class will be added by JS when the game starts */
+        /* It adds the logo as a semi-transparent background */
+        #game-container.game-active {
+            background-image: 
+                /* Create a semi-transparent white layer */
+                linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                /* The logo image underneath */
+                url('https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 80%; /* Make it large but not full width */
+        }
+        /* === END NEW CSS === */
+
 
         /* The game canvas is where we draw the game */
         #game-canvas {
             width: 100%;
             height: 100%;
+            /* Make canvas transparent so we see container background */
+            background-color: transparent; 
+            position: relative;
+            z-index: 5; /* Sit on top of the container's background */
         }
 
         /* Start screen and Game Over screen styling */
@@ -52,12 +72,11 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            z-index: 10;
+            z-index: 10; /* Sit on top of everything */
             padding: 20px;
-            box-sizing: border-box; /* Ensures padding doesn't break layout */
+            box-sizing: border-box; 
         }
 
-        /* Hide the game-over screen initially */
         #game-over-screen {
             display: none;
         }
@@ -67,20 +86,6 @@
             max-width: 350px;
             margin-bottom: 20px;
         }
-        
-        /* New: Logo for in-game display */
-        #in-game-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%; /* Adjust size as needed */
-            max-width: 300px;
-            opacity: 0.1; /* Semi-transparent */
-            z-index: 1; /* Behind player and obstacles */
-            display: none; /* Hidden until game starts */
-        }
-
 
         .instructions {
             font-size: 1.1rem;
@@ -92,12 +97,12 @@
             font-size: 1.5rem;
             font-weight: bold;
             padding: 15px 30px;
-            background-color: #d90000; /* DN Red */
+            background-color: #d90000;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 4px #8c0000; /* 3D effect */
+            box-shadow: 0 4px #8c0000;
             transition: all 0.1s ease;
         }
 
@@ -115,8 +120,8 @@
             font-size: 3rem;
             font-weight: bold;
             color: white;
-            z-index: 5;
-            -webkit-text-stroke: 2px black; /* Outline for visibility */
+            z-index: 15; /* On top of game, on top of screens */
+            -webkit-text-stroke: 2px black;
             text-stroke: 2px black;
             display: none; /* Hidden until game starts */
         }
@@ -132,27 +137,20 @@
         <div id="start-screen">
             <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" 
                  alt="Daily Nebraskan Logo" class="logo">
-            
             <p class="instructions">
                 A dryer fire is breaking out! <br>
                 Click your mouse to navigate through the dryers and avoid the fire below.
             </p>
-            
             <button id="start-button" class="start-button">START GAME</button>
         </div>
 
         <div id="game-over-screen">
             <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" 
                  alt="Daily Nebraskan Logo" class="logo">
-            
             <h2>GAME OVER</h2>
             <p id="final-score" class="instructions">Your Score: 0</p>
-            
             <button id="restart-button" class="start-button">TRY AGAIN</button>
         </div>
-
-        <img id="in-game-logo" src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" 
-             alt="Daily Nebraskan Logo">
 
         <div id="score-display">0</div>
 
@@ -165,6 +163,9 @@
         const canvas = document.getElementById('game-canvas');
         const context = canvas.getContext('2d');
         
+        // === NEW: Get game container ===
+        const gameContainer = document.getElementById('game-container');
+        
         // Get UI Screens and Buttons
         const startScreen = document.getElementById('start-screen');
         const gameOverScreen = document.getElementById('game-over-screen');
@@ -174,9 +175,6 @@
         // Get Score Displays
         const scoreDisplay = document.getElementById('score-display');
         const finalScoreDisplay = document.getElementById('final-score');
-
-        // New: Get in-game logo element
-        const inGameLogo = document.getElementById('in-game-logo');
 
         // Set Canvas dimensions
         canvas.width = 400;
@@ -197,8 +195,6 @@
         const fireGroundHeight = 60;
 
         // === 3. PLAYER OBJECT ===
-        // We'll just use a simple rectangle for the player
-        // A red square could represent the "breaking news element"
         class Player {
             constructor() {
                 this.x = 80;
@@ -208,7 +204,6 @@
                 this.velocity = 0;
             }
 
-            // Draw the player
             draw() {
                 context.fillStyle = '#d90000'; // DN Red
                 context.fillRect(this.x, this.y, this.width, this.height);
@@ -216,18 +211,15 @@
                 context.strokeRect(this.x, this.y, this.width, this.height);
             }
 
-            // Update player's position
             update() {
                 this.velocity += gravity;
                 this.y += this.velocity;
 
-                // Stop player from falling off the top
                 if (this.y < 0) {
                     this.y = 0;
                     this.velocity = 0;
                 }
 
-                // Check for collision with the fire ground
                 if (this.y + this.height > canvas.height - fireGroundHeight) {
                     this.y = canvas.height - fireGroundHeight - this.height;
                     this.velocity = 0;
@@ -235,7 +227,6 @@
                 }
             }
 
-            // Flap function
             flap() {
                 this.velocity = lift;
             }
@@ -247,17 +238,16 @@
                 this.width = 70; // Width of the dryer obstacle
                 this.gap = 200; // Gap for the player to fly through
                 
-                // Randomly position the gap
-                this.topHeight = Math.random() * (canvas.height - this.gap - fireGroundHeight - 50) + 20; // 20px padding from top
+                this.topHeight = Math.random() * (canvas.height - this.gap - fireGroundHeight - 50) + 20; 
                 this.bottomHeight = canvas.height - this.topHeight - this.gap;
 
-                this.x = canvas.width; // Start off-screen
-                this.color = '#AAAAAA'; // Gray for the dryer
+                this.x = canvas.width; 
+                this.color = '#AAAAAA'; 
                 this.borderColor = '#444444';
-                this.passed = false; // To track score
+                this.passed = false;
             }
 
-            // Draw the dryer
+            // Draw the dryer (with door)
             draw() {
                 context.fillStyle = this.color;
                 context.strokeStyle = this.borderColor;
@@ -271,14 +261,14 @@
                 context.fillRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
                 context.strokeRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
 
-                // === New: Draw Dryer Door ===
+                // === Dryer Door Art ===
                 const doorRadius = 25;
                 const doorCenterX = this.x + this.width / 2;
-                const doorColor = '#666666'; // Darker grey for door
-                const windowColor = '#DDDDDD'; // Light grey for window
+                const doorColor = '#666666'; 
+                const windowColor = '#DDDDDD'; 
 
                 // Top Dryer Door
-                if (this.topHeight > doorRadius * 2 + 10) { // Only draw if space allows
+                if (this.topHeight > doorRadius * 2 + 10) { 
                     context.beginPath();
                     context.arc(doorCenterX, this.topHeight - doorRadius - 15, doorRadius, 0, Math.PI * 2);
                     context.fillStyle = doorColor;
@@ -293,7 +283,7 @@
                 }
 
                 // Bottom Dryer Door
-                if (this.bottomHeight > doorRadius * 2 + 10) { // Only draw if space allows
+                if (this.bottomHeight > doorRadius * 2 + 10) { 
                     context.beginPath();
                     context.arc(doorCenterX, canvas.height - this.bottomHeight + doorRadius + 15, doorRadius, 0, Math.PI * 2);
                     context.fillStyle = doorColor;
@@ -306,32 +296,150 @@
                     context.fillStyle = windowColor;
                     context.fill();
                 }
-                // === End New Dryer Door ===
+                // === End Dryer Door ===
             }
 
-            // Move the dryer to the left
             update() {
                 this.x -= gameSpeed;
 
-                // Check if player passed the obstacle
                 if (!this.passed && this.x + this.width < player.x) {
                     score++;
                     scoreDisplay.textContent = score;
                     this.passed = true;
                 }
 
-                // Check for collision
                 this.checkCollision();
             }
 
             checkCollision() {
                 const playerRect = { x: player.x, y: player.y, width: player.width, height: player.height };
-                
-                // Define the top and bottom dryer rectangles
                 const topRect = { x: this.x, y: 0, width: this.width, height: this.topHeight };
                 const bottomRect = { x: this.x, y: canvas.height - this.bottomHeight, width: this.width, height: this.bottomHeight };
 
-                // AABB Collision Check
                 if (
                     playerRect.x < topRect.x + topRect.width &&
-                    playerRect.x + playerRect.width > topRect.x
+                    playerRect.x + playerRect.width > topRect.x &&
+                    playerRect.y < topRect.y + topRect.height &&
+                    playerRect.y + playerRect.height > topRect.y
+                ) {
+                    endGame(); // Collision with top dryer
+                }
+                
+                if (
+                    playerRect.x < bottomRect.x + bottomRect.width &&
+                    playerRect.x + playerRect.width > bottomRect.x &&
+                    playerRect.y < bottomRect.y + bottomRect.height &&
+                    playerRect.y + playerRect.height > bottomRect.y
+                ) {
+                    endGame(); // Collision with bottom dryer
+                }
+            }
+        }
+
+        // === 5. GAME HELPER FUNCTIONS ===
+        
+        function drawFireGround() {
+            context.fillStyle = '#FF4500'; // Orange-Red for fire
+            context.fillRect(0, canvas.height - fireGroundHeight, canvas.width, fireGroundHeight);
+            
+            context.fillStyle = '#FFD700'; // Yellow for flames
+            for (let i = 0; i < canvas.width; i += 10) {
+                let flameHeight = Math.random() * 20 + 10;
+                context.fillRect(i, canvas.height - fireGroundHeight - flameHeight + 10, 8, flameHeight);
+            }
+        }
+
+        function handleObstacles() {
+            if (frame % 150 === 0) {
+                obstacles.push(new Obstacle());
+            }
+
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].update();
+                obstacles[i].draw();
+
+                if (obstacles[i].x + obstacles[i].width < 0) {
+                    obstacles.splice(i, 1);
+                }
+            }
+        }
+
+        function resetGame() {
+            player = new Player();
+            obstacles = [];
+            score = 0;
+            frame = 0;
+            isGameOver = false;
+            isGameStarted = true;
+            
+            // Reset UI
+            scoreDisplay.textContent = score;
+            scoreDisplay.style.display = 'block';
+            gameOverScreen.style.display = 'none';
+            startScreen.style.display = 'none';
+            
+            // === NEW: Add class to container to show logo ===
+            gameContainer.classList.add('game-active');
+        }
+
+        function startGame() {
+            resetGame();
+            gameLoop(); // Start the animation loop
+        }
+
+        function endGame() {
+            if (isGameOver) return; 
+            isGameOver = true;
+            isGameStarted = false;
+            
+            // Show game over screen
+            scoreDisplay.style.display = 'none';
+            finalScoreDisplay.textContent = `Your Score: ${score}`;
+            gameOverScreen.style.display = 'flex';
+
+            // === NEW: Remove class to hide logo ===
+            gameContainer.classList.remove('game-active');
+        }
+
+        // === 6. THE MAIN GAME LOOP ===
+        function gameLoop() {
+            if (isGameOver) return; 
+
+            // Clear the canvas every frame
+            // We clear to transparent so the background logo shows through
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the fire ground
+            drawFireGround();
+            
+            // Update and draw obstacles
+            handleObstacles();
+
+            // Update and draw the player
+            player.update();
+            player.draw();
+
+            frame++;
+            requestAnimationFrame(gameLoop);
+        }
+
+        // === 7. EVENT LISTENERS ===
+        
+        window.addEventListener('mousedown', () => {
+            if (isGameStarted) {
+                player.flap();
+            }
+        });
+
+        startButton.addEventListener('click', () => {
+            startGame();
+        });
+
+        restartButton.addEventListener('click', () => {
+            startGame();
+        });
+
+    </script>
+
+</body>
+</html>
