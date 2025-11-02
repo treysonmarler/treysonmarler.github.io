@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Nebraskan - Dryer Fire Dash</title>
+    <title>Daily Nebraskan - Dryer Fire Dash (TEST)</title>
     <style>
         /* CSS Variables for easy customization */
         :root {
             --game-width: 400px;
             --game-height: 600px;
-            --herbie-width: 70px; /* Adjusted size for the image */
-            --herbie-height: 58px; /* Adjusted size for the image */
+            --herbie-width: 70px; 
+            --herbie-height: 58px;
             --obstacle-width: 80px;
-            --gap-height: 160px; /* Made gap slightly larger */
+            --gap-height: 160px;
             --game-speed: 2px;
             --gravity: 0.3;
             --jump-force: -7;
 
-            /* FIX: Images are now embedded as base64 data to avoid CORS errors.
-            No more external URLs!
-            */
+            /* Embedded Images (These are working) */
             --herbie-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQcAAAD7AQMAAAD+yYHcAAAABlBMVEVHcEz///+flZ4gAAAAAXRSTlMAQObYZgAAAZpJREFUeJzt2bFpAjEUhvFNpYVOQoEOCoJdBLvYxSnYxSn4Uk7A4iJYBAUpToJDJx2EgoOCg4Pg0sFBQULs9+bZ3pBFuJj33vt9R5Kk/+18/w+fYj+k/+73H/7gN/2h/+r43f+H7/5T/7vT2wMAAAAAAAAAAAAAAAAAAAAAgG98D/8qS9/f331L/p+fn1z+9fP/F//362f/N/7v18/+/V38f/N//+p3X1//8p+L/6l/wB/g2wAAAAAASJlfJcng37v/R+a5BIAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgA/wE/APMkdqfJg5xXAAAAAElFTkSuQmCC');
-            --washer-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGklEQVR4nO1XYWvUYBCdaSpWLGmrReqGVRfcuFAfCuLmVnFhK3XRFb3rX3DoT+AuBHGlK6504aKLtX9BcaEiKogVRRVEUVHBxYsVxVpEtDTS9yb5/k/y3stkkhJO+MB7b2beyU9mJ/nmJiT0P4oB3QBuAJcAmkSmD3gNPAV+Ag8AuwF+J+bw0wBwL4yBAzgG9ANkAFutxX8B3rYc+w+AacBvAEfKzY8Bw1n2G7gL/Gv6A/DMTk7nAJYBvUa0CjgErANGAJ/T/wYwFvjAtrIqAdcCflTAD4G1QBcKYjtwG7gCvALqgGmgwBXAWaBlI/Ah8CswbQnwBzAOnAbmAE+Bb4HtaqUqQO+B2y0Fvgc+A/4EngV+B+YEo1bA0RHgY+BqYH3bWfAocCbwNfAR+BH4CVh3BHgSeA/4DFj/t1b/DNgEHHsRuA1cDfzh9iLwIXC0/Rk5h8BlQJcQ7AAaJ8Nn4FbgE+Au0HlBmA/MgM/At8BvQG5/CvQLnAf+BFYB7QJz4yA7cCOw0hJgG7AQGGqAdQZclY2pBtj8FHgX2Nsm4fD6fK89fWkDWAisA14DlwGdgNcB04AtwC7gE+BuYD0bAFcBm9t9Bfgb+BHYBtwC/AXsR2Bo0wKWAhM2AJ8BPwMbLMQ+BJYBdwEfgS+Bw4D1WAC8BywG+tq9BPgb+BxYDPwGbLaYfAiMAN4DzgK/A68Cp9uLsUuAm9WlfwGfA4cD33sZuBLYA7wK/AmcBgZbCiwGfgO2AW8CV4GPgXeBWcD3gM3A0wBbCsBXYA3QMhF4HLgCeBd4H7gCeB9YU1TwErAGuA34HThpMXAY+A+46aR1P1uAi4GngbPVYh1wCfgS+B8YUj3uB/YCVwK/Au8A121n3W/ApcB1QGcrhMWA9U0GngA3/wY2Az8Ax4H/gTWBqSLAUuAz4EPgK+BFYCPQxWqgA+clR4EzwMu2s66PAGeBx1sK/ATcAjQM+Gsp8C7wDHCn/R04HngXuNz+H5gJfGsp0D5gO/AR8LPtA/ARcBk43W2W/f8DcC3wIXC97XfAJ0C/Ff4aMGeA/4EpgZkSYHXbB8B3wP0mAx8A59T/L/ADgAHAe6A/8CCwFfgb+BOYBHwK/Jp/xP8l8KV/AXf5g8/hK2UAAAAASUVORK5CYII=');
+            --washer-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGklEQVR4nO1XYWvUYBCdaSpWLGmrReqGVRfcuFAfCuLmVnFhK3XRFb3rX3DoT+AuBHGlK6504aKLtX9BcaEiKogVRRVEUVHBxYsVxVpEtDTS9yb5/k/y3stkkhJO+MB7b2beyU9mJ/nmJiT0P4oB3QBuAJcAmkSmD3gNPAV+Ag8AuwF+J+bw0wBwL4yBAzgG9ANkAFutxX8B3rYc+w+AacBvAEfKzY8Bw1n2G7gL/Gv6A/DMTk7nAJYBvUa0CjgErANGAJ/T/wYwFvjAtrIqAdcCflTAD4G1QBcKYjtwG7gCvALqgGmgwBXAWaBlI/Ah8CswbQnwBzAOnAbmAE+Bb4HtaqUqQO+B2y0Fvgc+A/4EngV+B+YEo1bA0RHgY+BqYH3bWfAocCbwNfAR+BH4CVh3BHgSeA/4DFj/t1b/DNgEHHsRuA1cDfzh9iLwIXC0/Rk5h8BlQJcQ7AAaJ8Nn4FbgE+Au0HlBmA/MgM/At8BvQG5/CvQLnAf+BFYB7QJz4yA7cCOw0hJgG7AQGGqAdQZclY2pBtj8FHgX2Nsm4fD6fK89fWkDWAisA14DlwGdgNcB04AtwC7gE+BuYD0bAFcBm9t9Bfgb+BHYBtwC/AXsR2Bo0wKWAhM2AJ8BPwMbLMQ+BJYBdwEfgS+Bw4D1WAC8BywG+tq9BPgb+BxYDPwGbLaYfAiMAN4DzgK/A68Cp9uLsUuAm9WlfwGfA4cD33sZuBLYA7wK/AmcBgZbCiwGfgO2AW8CV4GPgXeBWcD3gM3A0wBbCsBXYA3QMhF4HLgCeBd4H7gCeB9YUj3uB/YCVwK/Au8A121n3W/ApcB1QGcrhMWA9U0GngA3/wY2Az8Ax4H/gTWBqSLAUuAz4EPgK+BFYCPQxWqgA+clR4EzwMu2s66PAGeBx1sK/ATcAjQM+Gsp8C7wDHCn/R04HngXuNz+H5gJfGsp0D5gO/AR8LPtA/ARcBk43W2W/f8DcC3wIXC97XfAJ0C/Ff4aMGeA/4EpgZkSYHXbB8B3wP0mAx8A59T/L/ADgAHAe6A/8CCwFfgb+BOYBHwK/Jp/xP8l8KV/AXf5g8/hK2UAAAAASUVORK5CYII=');
             --dryer-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGklEQVR4nO1XYWvUYBCdaSpWLGmrReqGVRfcuFAfCuLmVnFhK3XRFb3rX3DoT+AuBHGlK6504aKLtX9BcaEiKogVRRVEUVHBxYsVxVpEtDTS9yb5/k/y3stkkhJO+MB7b2beyU9mJ/nmJiT0P4oB3QBuAJcAmkSmD3gNPAV+Ag8AuwF+J+bw0wBwL4yBAzgG9ANkAFutxX8B3rYc+w+AacBvAEfKzY8Bw1n2G7gL/Gv6A/DMTk7nAJYBvUa0CjgErANGAJ/T/wYwFvjAtrIqAdcCflTAD4G1QBcKYjtwG7gCvALqgGmgwBXAWaBlI/Ah8CswbQnwBzAOnAbmAE+Bb4HtaqUqQO+B2y0Fvgc+A/4EngV+B+YEo1bA0RHgY+BqYH3bWfAocCbwNfAR+BH4CVh3BHgSeA/4DFj/t1b/DNgEHHsRuA1cDfzh9iLwIXC0/Rk5h8BlQJcQ7AAaJ8Nn4FbgE+Au0HlBmA/MgM/At8BvQG5/CvQLnAf+BFYB7QJz4yA7cCOw0hJgG7AQGGqAdQZclY2pBtj8FHgX2Nsm4fD6fK89fWkDWAisA14DlwGdgNcB04AtwC7gE+BuYD0bAFcBm9t9Bfgb+BHYBtwC/AXsR2Bo0wKWAhM2AJ8BPwMbLMQ+BJYBdwEfgS+Bw4D1WAC8BywG+tq9BPgb+BxYDPwGbLaYfAiMAN4DzgK/A68Cp9uLsUuAm9WlfwGfA4cD33sZuBLYA7wK/AmcBgZbCiwGfgO2AW8CV4GPgXeBWcD3gM3A0wBbCsBXYA3QMhF4HLgCeBd4H7gCeB9YUj3uB/YCVwK/Au8A121n3W/ApcB1QGcrhMWA9U0GngA3/wY2Az8Ax4H/gTWBqSLAUuAz4EPgK+BFYCPQxWqgA+clR4EzwMu2s66PAGeBx1sK/ATcAjQM+Gsp8C7wDHCn/R04HngXuNz+H5gJfGsp0D5gO/AR8LPtA/ARcBk43W2W/f8DcC3wIXC97XfAJ0C/Ff4aMGeA/4EpgZkSYHXbB8B3wP0mAx8A59T/L/ADgAHAe6A/8CCwFfgb+BOYBHwK/Jp/xP8l8KV/AXf5g8/hK2UAAAAASUVORK5CYII=');
         }
 
@@ -41,9 +39,8 @@
             position: relative;
             overflow: hidden;
             border: 2px solid black;
-            background-image: url('https://housing.unl.edu/sites/unl.edu.student-affairs.university-housing/files/styles/16_9_960x540/public/media/image/hall-courtyards_0.jpg?itok=-M7HpL0t');
-            background-size: cover;
-            background-position: center;
+            /* TEST: Using a simple color background */
+            background-color: #4c98d4; 
         }
 
         #herbie {
@@ -109,19 +106,14 @@
             }
         }
 
+        /* TEST: Logo temporarily hidden */
         #logo {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            max-width: 300px;
-            z-index: 200;
+            display: none; 
         }
 
         #score {
             position: absolute;
-            top: 90px; 
+            top: 20px; /* Moved up since logo is gone */
             left: 50%;
             transform: translateX(-50%);
             font-size: 3rem;
@@ -150,9 +142,9 @@
             box-sizing: border-box;
         }
 
+        /* TEST: Logo temporarily hidden on start screen */
         #start-screen img {
-            width: 90%;
-            margin-bottom: 20px;
+            display: none;
         }
 
         #start-screen h1 {
@@ -191,13 +183,11 @@
     <div id="game-container">
         
         <div id="start-screen">
-            <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%C188" alt="Daily Nebraskan Logo">
             <h1>Dryer Fire Dash</h1>
             <p>Help Herbie Husker escape the dryer fire! Click, right-click, or press SPACE to jump and avoid the washers and dryers.</p>
             <button id="start-button">Start Game</button>
         </div>
 
-        <img id="logo" src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%C188" alt="Daily Nebraskan Logo">
         <div id="score">0</div>
         <div id="herbie"></div>
         <div id="flames"></div>
@@ -221,7 +211,7 @@
         const startButton = document.getElementById('start-button');
         const retryButton = document.getElementById('retry-button');
         const finalScoreDisplay = document.getElementById('final-score');
-        const logo = document.getElementById('logo');
+        // const logo = document.getElementById('logo'); // No longer needed for test
 
         // --- Get CSS Variables ---
         const style = getComputedStyle(document.documentElement);
@@ -257,7 +247,7 @@
             herbie.style.transform = 'rotate(0deg)';
             scoreDisplay.textContent = '0';
             scoreDisplay.style.display = 'block';
-            logo.style.display = 'block';
+            // logo.style.display = 'block'; // Logo hidden
             startScreen.style.display = 'none';
             gameOverScreen.style.display = 'none';
 
@@ -344,8 +334,7 @@
         }
 
         function checkCollision() {
-            // FIX: Check for ground (flames) collision. 
-            // We use (FLAME_HEIGHT - 10) to give a little buffer so it looks like Herbie is *in* the flames.
+            // Check for ground (flames) collision. 
             if (herbieY > (GAME_HEIGHT - HERBIE_HEIGHT - (FLAME_HEIGHT - 10)) || herbieY < 0) {
                 return true;
             }
@@ -360,8 +349,6 @@
                 const washerRect = washer.getBoundingClientRect();
                 const dryerRect = dryer.getBoundingClientRect();
 
-                // Simple AABB (Axis-Aligned Bounding Box) collision check
-                // We check if Herbie's box is overlapping with either the washer or dryer box
                 const collidesWithWasher = 
                     herbieRect.right > washerRect.left &&
                     herbieRect.left < washerRect.right &&
@@ -380,46 +367,40 @@
         }
 
         function endGame() {
-            if (isGameOver) return; // Prevent endGame from running multiple times
+            if (isGameOver) return; 
             isGameOver = true;
             clearInterval(gameLoop);
             clearInterval(obstacleLoop);
             
             finalScoreDisplay.textContent = `Final Score: ${score}`;
             gameOverScreen.style.display = 'flex';
-            logo.style.display = 'none';
+            // logo.style.display = 'none'; // Logo hidden
             scoreDisplay.style.display = 'none';
         }
 
         // --- Event Listeners ---
         
-        // Start and Retry
         startButton.addEventListener('click', startGame);
         retryButton.addEventListener('click', startGame);
 
         // --- Controls ---
         
-        // 1. Left Click
         document.addEventListener('mousedown', (e) => {
             if (e.button === 0) { // 0 is the left mouse button
-                if (isGameOver) return; // Don't jump if game is over
+                if (isGameOver) return;
                 jump();
             }
         });
 
-        // 2. Right Click (as requested)
         document.addEventListener('contextmenu', (e) => {
-            e.preventDefault(); // Prevents the right-click menu
+            e.preventDefault(); 
             if (isGameOver) return;
             jump();
         });
 
-        // 3. Spacebar
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 if (isGameOver) {
-                    // Optional: allow spacebar to restart the game
-                    // startGame();
                     return;
                 }
                 jump();
