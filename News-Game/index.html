@@ -67,6 +67,20 @@
             max-width: 350px;
             margin-bottom: 20px;
         }
+        
+        /* New: Logo for in-game display */
+        #in-game-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; /* Adjust size as needed */
+            max-width: 300px;
+            opacity: 0.1; /* Semi-transparent */
+            z-index: 1; /* Behind player and obstacles */
+            display: none; /* Hidden until game starts */
+        }
+
 
         .instructions {
             font-size: 1.1rem;
@@ -137,6 +151,9 @@
             <button id="restart-button" class="start-button">TRY AGAIN</button>
         </div>
 
+        <img id="in-game-logo" src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" 
+             alt="Daily Nebraskan Logo">
+
         <div id="score-display">0</div>
 
         <canvas id="game-canvas"></canvas>
@@ -157,6 +174,9 @@
         // Get Score Displays
         const scoreDisplay = document.getElementById('score-display');
         const finalScoreDisplay = document.getElementById('final-score');
+
+        // New: Get in-game logo element
+        const inGameLogo = document.getElementById('in-game-logo');
 
         // Set Canvas dimensions
         canvas.width = 400;
@@ -250,6 +270,43 @@
                 // Draw bottom dryer
                 context.fillRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
                 context.strokeRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
+
+                // === New: Draw Dryer Door ===
+                const doorRadius = 25;
+                const doorCenterX = this.x + this.width / 2;
+                const doorColor = '#666666'; // Darker grey for door
+                const windowColor = '#DDDDDD'; // Light grey for window
+
+                // Top Dryer Door
+                if (this.topHeight > doorRadius * 2 + 10) { // Only draw if space allows
+                    context.beginPath();
+                    context.arc(doorCenterX, this.topHeight - doorRadius - 15, doorRadius, 0, Math.PI * 2);
+                    context.fillStyle = doorColor;
+                    context.fill();
+                    context.strokeStyle = this.borderColor;
+                    context.stroke();
+                    // Window
+                    context.beginPath();
+                    context.arc(doorCenterX, this.topHeight - doorRadius - 15, doorRadius * 0.6, 0, Math.PI * 2);
+                    context.fillStyle = windowColor;
+                    context.fill();
+                }
+
+                // Bottom Dryer Door
+                if (this.bottomHeight > doorRadius * 2 + 10) { // Only draw if space allows
+                    context.beginPath();
+                    context.arc(doorCenterX, canvas.height - this.bottomHeight + doorRadius + 15, doorRadius, 0, Math.PI * 2);
+                    context.fillStyle = doorColor;
+                    context.fill();
+                    context.strokeStyle = this.borderColor;
+                    context.stroke();
+                    // Window
+                    context.beginPath();
+                    context.arc(doorCenterX, canvas.height - this.bottomHeight + doorRadius + 15, doorRadius * 0.6, 0, Math.PI * 2);
+                    context.fillStyle = windowColor;
+                    context.fill();
+                }
+                // === End New Dryer Door ===
             }
 
             // Move the dryer to the left
@@ -277,136 +334,4 @@
                 // AABB Collision Check
                 if (
                     playerRect.x < topRect.x + topRect.width &&
-                    playerRect.x + playerRect.width > topRect.x &&
-                    playerRect.y < topRect.y + topRect.height &&
-                    playerRect.y + playerRect.height > topRect.y
-                ) {
-                    endGame(); // Collision with top dryer
-                }
-                
-                if (
-                    playerRect.x < bottomRect.x + bottomRect.width &&
-                    playerRect.x + playerRect.width > bottomRect.x &&
-                    playerRect.y < bottomRect.y + bottomRect.height &&
-                    playerRect.y + playerRect.height > bottomRect.y
-                ) {
-                    endGame(); // Collision with bottom dryer
-                }
-            }
-        }
-
-        // === 5. GAME HELPER FUNCTIONS ===
-        
-        // Function to draw the "fire" ground
-        function drawFireGround() {
-            context.fillStyle = '#FF4500'; // Orange-Red for fire
-            context.fillRect(0, canvas.height - fireGroundHeight, canvas.width, fireGroundHeight);
-            
-            // Add some "flame" effects
-            context.fillStyle = '#FFD700'; // Yellow for flames
-            for (let i = 0; i < canvas.width; i += 10) {
-                let flameHeight = Math.random() * 20 + 10;
-                context.fillRect(i, canvas.height - fireGroundHeight - flameHeight + 10, 8, flameHeight);
-            }
-        }
-
-        // Function to handle obstacle spawning
-        function handleObstacles() {
-            // Spawn a new obstacle every 150 frames
-            if (frame % 150 === 0) {
-                obstacles.push(new Obstacle());
-            }
-
-            // Update and draw all obstacles
-            for (let i = obstacles.length - 1; i >= 0; i--) {
-                obstacles[i].update();
-                obstacles[i].draw();
-
-                // Remove obstacles that are off-screen
-                if (obstacles[i].x + obstacles[i].width < 0) {
-                    obstacles.splice(i, 1);
-                }
-            }
-        }
-
-        // Function to reset all game variables
-        function resetGame() {
-            player = new Player();
-            obstacles = [];
-            score = 0;
-            frame = 0;
-            isGameOver = false;
-            isGameStarted = true;
-            
-            // Reset UI
-            scoreDisplay.textContent = score;
-            scoreDisplay.style.display = 'block';
-            gameOverScreen.style.display = 'none';
-            startScreen.style.display = 'none';
-        }
-
-        // Function to start the game
-        function startGame() {
-            resetGame();
-            gameLoop(); // Start the animation loop
-        }
-
-        // Function to end the game
-        function endGame() {
-            if (isGameOver) return; // Don't run twice
-            isGameOver = true;
-            isGameStarted = false;
-            
-            // Show game over screen
-            scoreDisplay.style.display = 'none';
-            finalScoreDisplay.textContent = `Your Score: ${score}`;
-            gameOverScreen.style.display = 'flex';
-        }
-
-        // === 6. THE MAIN GAME LOOP ===
-        function gameLoop() {
-            if (isGameOver) return; // Stop the loop if game is over
-
-            // Clear the canvas every frame
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Draw the fire ground
-            drawFireGround();
-            
-            // Update and draw obstacles
-            handleObstacles();
-
-            // Update and draw the player
-            player.update();
-            player.draw();
-
-            // Increment frame counter
-            frame++;
-
-            // Continue the loop
-            requestAnimationFrame(gameLoop);
-        }
-
-        // === 7. EVENT LISTENERS ===
-        
-        // Listen for mouse click to "flap"
-        window.addEventListener('mousedown', () => {
-            if (isGameStarted) {
-                player.flap();
-            }
-        });
-
-        // Listen for Start Button click
-        startButton.addEventListener('click', () => {
-            startGame();
-        });
-
-        // Listen for Restart Button click
-        restartButton.addEventListener('click', () => {
-            startGame();
-        });
-
-    </script>
-
-</body>
-</html>
+                    playerRect.x + playerRect.width > topRect.x
