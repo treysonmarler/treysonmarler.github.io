@@ -9,24 +9,18 @@
         :root {
             --game-width: 400px;
             --game-height: 600px;
-            --herbie-width: 70px;
-            --herbie-height: 58px;
+            --herbie-width: 60px; /* Adjust as needed for your image */
+            --herbie-height: 50px; /* Adjust as needed for your image */
             --obstacle-width: 80px;
-            --gap-height: 160px;
+            --gap-height: 150px;
             --game-speed: 2px;
             --gravity: 0.3;
             --jump-force: -7;
 
-            /*
-            FIX: Using new, stable, and CORS-friendly URLs
-            */
-            --herbie-img: url('https://i.imgur.com/Y1Q9Z4p.png'); /* Herbie Husker */
-            --washer-img: url('https://i.imgur.com/GzByswJ.png'); /* Washer/Dryer */
-            --dryer-img: url('https://i.imgur.com/GzByswJ.png'); /* Washer/Dryer */
-
-            /* Re-adding background and logo with stable URLs */
-            --bg-img: url('https://i.imgur.com/2c1qZ7A.jpeg'); /* UNL Housing */
-            --logo-img: url('https://i.imgur.com/8Q9jN5B.png'); /* Daily Nebraskan Logo */
+            --herbie-img: url('https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Herbie_Husker_logo.svg/1200px-Herbie_Husker_logo.svg.png');
+            /* UPDATED: Washer and Dryer images now included */
+            --washer-img: url('https://i.imgur.com/GzByswJ.png'); /* Using the image you provided */
+            --dryer-img: url('https://i.imgur.com/GzByswJ.png'); /* Using the same image for now */
         }
 
         body {
@@ -45,7 +39,7 @@
             position: relative;
             overflow: hidden;
             border: 2px solid black;
-            background-image: var(--bg-img);
+            background-image: url('https://housing.unl.edu/sites/unl.edu.student-affairs.university-housing/files/styles/16_9_960x540/public/media/image/hall-courtyards_0.jpg?itok=-M7HpL0t');
             background-size: cover;
             background-position: center;
         }
@@ -75,28 +69,36 @@
         }
 
         .washer {
+            /* This is the top obstacle */
             width: 100%;
-            background-image: var(--washer-img);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: bottom;
+            background-image: var(--washer-img); /* Use background-image for URLs */
+            background-size: contain; /* Ensure the image fits */
+            background-repeat: no-repeat; /* Prevent tiling */
+            background-position: bottom; /* Position the washer at the bottom of its allocated space */
+            border: 0px solid black; /* Remove border if image has its own */
             box-sizing: border-box;
+            /* Placeholder style - remove or adjust if image has its own top/bottom */
+            /* border-bottom: 5px solid #333; */ 
         }
 
         .dryer {
+            /* This is the bottom obstacle */
             width: 100%;
-            background-image: var(--dryer-img);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: top;
+            background-image: var(--dryer-img); /* Use background-image for URLs */
+            background-size: contain; /* Ensure the image fits */
+            background-repeat: no-repeat; /* Prevent tiling */
+            background-position: top; /* Position the dryer at the top of its allocated space */
+            border: 0px solid black; /* Remove border if image has its own */
             box-sizing: border-box;
+             /* Placeholder style - remove or adjust if image has its own top/bottom */
+            /* border-top: 5px solid #333; */
         }
 
         #flames {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 200%; 
+            width: 200%; /* Double width for animation */
             height: 40px;
             background: linear-gradient(90deg, #FF4500, #FFA500, #FF4500, #FFA500, #FF4500);
             background-size: 50% 100%;
@@ -120,17 +122,12 @@
             transform: translateX(-50%);
             width: 80%;
             max-width: 300px;
-            height: 47px; /* Set height for the logo */
             z-index: 200;
-            background-image: var(--logo-img);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
         }
 
         #score {
             position: absolute;
-            top: 65px; /* Moved down to be below new logo height */
+            top: 90px; /* Below the logo */
             left: 50%;
             transform: translateX(-50%);
             font-size: 3rem;
@@ -138,7 +135,7 @@
             color: white;
             text-shadow: 2px 2px 4px black;
             z-index: 200;
-            display: none; 
+            display: none; /* Hidden until game starts */
         }
 
         #start-screen, #game-over-screen {
@@ -159,14 +156,8 @@
             box-sizing: border-box;
         }
 
-        #start-logo {
+        #start-screen img {
             width: 90%;
-            max-width: 350px;
-            height: 55px; /* Set height for the logo */
-            background-image: var(--logo-img);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
             margin-bottom: 20px;
         }
 
@@ -196,7 +187,7 @@
         }
 
         #game-over-screen {
-            display: none; 
+            display: none; /* Hidden by default */
         }
 
     </style>
@@ -206,13 +197,13 @@
     <div id="game-container">
         
         <div id="start-screen">
-            <div id="start-logo"></div>
+            <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" alt="Daily Nebraskan Logo">
             <h1>Dryer Fire Dash</h1>
             <p>Help Herbie Husker escape the dryer fire! Click, right-click, or press SPACE to jump and avoid the washers and dryers.</p>
             <button id="start-button">Start Game</button>
         </div>
 
-        <div id="logo"></div>
+        <img id="logo" src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" alt="Daily Nebraskan Logo">
         <div id="score">0</div>
         <div id="herbie"></div>
         <div id="flames"></div>
@@ -236,7 +227,7 @@
         const startButton = document.getElementById('start-button');
         const retryButton = document.getElementById('retry-button');
         const finalScoreDisplay = document.getElementById('final-score');
-        const logo = document.getElementById('logo'); 
+        const logo = document.getElementById('logo');
 
         // --- Get CSS Variables ---
         const style = getComputedStyle(document.documentElement);
@@ -258,7 +249,7 @@
         // --- Game Functions ---
         function startGame() {
             // Reset state
-            herbieY = GAME_HEIGHT / 3; // Start higher up
+            herbieY = GAME_HEIGHT / 2;
             herbieVelocity = 0;
             score = 0;
             obstacles = [];
@@ -278,19 +269,17 @@
 
             // Start game loops
             gameLoop = setInterval(update, 20); // 50 FPS
-            obstacleLoop = setInterval(createObstacle, 2000); 
+            obstacleLoop = setInterval(createObstacle, 2000); // New obstacle every 2 seconds
         }
 
         function update() {
-            if (isGameOver) return; // Stop update if game is over
-
             // 1. Apply physics
             herbieVelocity += GRAVITY;
             herbieY += herbieVelocity;
             herbie.style.top = herbieY + 'px';
 
             // 2. Rotate Herbie based on velocity
-            herbie.style.transform = `rotate(${Math.min(herbieVelocity * 2, 90)}deg)`; // Cap rotation
+            herbie.style.transform = `rotate(${herbieVelocity * 2}deg)`;
 
             // 3. Move obstacles
             moveObstacles();
@@ -314,7 +303,7 @@
             obstaclePair.style.left = GAME_WIDTH + 'px';
             
             // Randomly position the gap
-            const gapTop = Math.random() * (GAME_HEIGHT - GAP_HEIGHT - FLAME_HEIGHT * 2.5) + (FLAME_HEIGHT * 1.5);
+            const gapTop = Math.random() * (GAME_HEIGHT - GAP_HEIGHT - FLAME_HEIGHT * 2) + (FLAME_HEIGHT * 1.5);
             
             const washer = document.createElement('div');
             washer.classList.add('washer');
@@ -359,8 +348,8 @@
         }
 
         function checkCollision() {
-            // Check for ground (flames) collision. 
-            if (herbieY > (GAME_HEIGHT - HERBIE_HEIGHT - (FLAME_HEIGHT - 10)) || herbieY < 0) {
+            // Check for ground (flames) and ceiling collision
+            if (herbieY > (GAME_HEIGHT - HERBIE_HEIGHT - FLAME_HEIGHT) || herbieY < 0) {
                 return true;
             }
 
@@ -374,17 +363,12 @@
                 const washerRect = washer.getBoundingClientRect();
                 const dryerRect = dryer.getBoundingClientRect();
 
-                const collidesWithWasher = 
+                // Simple AABB (Axis-Aligned Bounding Box) collision check
+                if (
                     herbieRect.right > washerRect.left &&
                     herbieRect.left < washerRect.right &&
-                    herbieRect.top < washerRect.bottom;
-
-                const collidesWithDryer = 
-                    herbieRect.right > dryerRect.left &&
-                    herbieRect.left < dryerRect.right &&
-                    herbieRect.bottom > dryerRect.top;
-
-                if (collidesWithWasher || collidesWithDryer) {
+                    (herbieRect.top < washerRect.bottom || herbieRect.bottom > dryerRect.top)
+                ) {
                     return true;
                 }
             }
@@ -392,7 +376,6 @@
         }
 
         function endGame() {
-            if (isGameOver) return; 
             isGameOver = true;
             clearInterval(gameLoop);
             clearInterval(obstacleLoop);
@@ -405,29 +388,28 @@
 
         // --- Event Listeners ---
         
+        // Start and Retry
         startButton.addEventListener('click', startGame);
         retryButton.addEventListener('click', startGame);
 
         // --- Controls ---
         
+        // 1. Left Click
         document.addEventListener('mousedown', (e) => {
             if (e.button === 0) { // 0 is the left mouse button
-                if (isGameOver) return;
                 jump();
             }
         });
 
+        // 2. Right Click (as requested)
         document.addEventListener('contextmenu', (e) => {
-            e.preventDefault(); 
-            if (isGameOver) return;
+            e.preventDefault(); // Prevents the right-click menu
             jump();
         });
 
+        // 3. Spacebar
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
-                if (isGameOver) {
-                    return;
-                }
                 jump();
             }
         });
