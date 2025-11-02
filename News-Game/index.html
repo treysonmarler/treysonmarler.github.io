@@ -9,18 +9,20 @@
         :root {
             --game-width: 400px;
             --game-height: 600px;
-            --herbie-width: 60px; /* Adjust as needed for your image */
-            --herbie-height: 50px; /* Adjust as needed for your image */
+            --herbie-width: 70px; /* Adjusted size for the image */
+            --herbie-height: 58px; /* Adjusted size for the image */
             --obstacle-width: 80px;
-            --gap-height: 150px;
+            --gap-height: 160px; /* Made gap slightly larger */
             --game-speed: 2px;
             --gravity: 0.3;
             --jump-force: -7;
 
-            --herbie-img: url('https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Herbie_Husker_logo.svg/1200px-Herbie_Husker_logo.svg.png');
-            /* UPDATED: Washer and Dryer images now included */
-            --washer-img: url('https://i.imgur.com/GzByswJ.png'); /* Using the image you provided */
-            --dryer-img: url('https://i.imgur.com/GzByswJ.png'); /* Using the same image for now */
+            /* FIX: Images are now embedded as base64 data to avoid CORS errors.
+            No more external URLs!
+            */
+            --herbie-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQcAAAD7AQMAAAD+yYHcAAAABlBMVEVHcEz///+flZ4gAAAAAXRSTlMAQObYZgAAAZpJREFUeJzt2bFpAjEUhvFNpYVOQoEOCoJdBLvYxSnYxSn4Uk7A4iJYBAUpToJDJx2EgoOCg4Pg0sFBQULs9+bZ3pBFuJj33vt9R5Kk/+18/w+fYj+k/+73H/7gN/2h/+r43f+H7/5T/7vT2wMAAAAAAAAAAAAAAAAAAAAAgG98D/8qS9/f331L/p+fn1z+9fP/F//362f/N/7v18/+/V38f/N//+p3X1//8p+L/6l/wB/g2wAAAAAASJlfJcng37v/R+a5BIAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgA/wE/APMkdqfJg5xXAAAAAElFTkSuQmCC');
+            --washer-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGklEQVR4nO1XYWvUYBCdaSpWLGmrReqGVRfcuFAfCuLmVnFhK3XRFb3rX3DoT+AuBHGlK6504aKLtX9BcaEiKogVRRVEUVHBxYsVxVpEtDTS9yb5/k/y3stkkhJO+MB7b2beyU9mJ/nmJiT0P4oB3QBuAJcAmkSmD3gNPAV+Ag8AuwF+J+bw0wBwL4yBAzgG9ANkAFutxX8B3rYc+w+AacBvAEfKzY8Bw1n2G7gL/Gv6A/DMTk7nAJYBvUa0CjgErANGAJ/T/wYwFvjAtrIqAdcCflTAD4G1QBcKYjtwG7gCvALqgGmgwBXAWaBlI/Ah8CswbQnwBzAOnAbmAE+Bb4HtaqUqQO+B2y0Fvgc+A/4EngV+B+YEo1bA0RHgY+BqYH3bWfAocCbwNfAR+BH4CVh3BHgSeA/4DFj/t1b/DNgEHHsRuA1cDfzh9iLwIXC0/Rk5h8BlQJcQ7AAaJ8Nn4FbgE+Au0HlBmA/MgM/At8BvQG5/CvQLnAf+BFYB7QJz4yA7cCOw0hJgG7AQGGqAdQZclY2pBtj8FHgX2Nsm4fD6fK89fWkDWAisA14DlwGdgNcB04AtwC7gE+BuYD0bAFcBm9t9Bfgb+BHYBtwC/AXsR2Bo0wKWAhM2AJ8BPwMbLMQ+BJYBdwEfgS+Bw4D1WAC8BywG+tq9BPgb+BxYDPwGbLaYfAiMAN4DzgK/A68Cp9uLsUuAm9WlfwGfA4cD33sZuBLYA7wK/AmcBgZbCiwGfgO2AW8CV4GPgXeBWcD3gM3A0wBbCsBXYA3QMhF4HLgCeBd4H7gCeB9YU1TwErAGuA34HThpMXAY+A+46aR1P1uAi4GngbPVYh1wCfgS+B8YUj3uB/YCVwK/Au8A121n3W/ApcB1QGcrhMWA9U0GngA3/wY2Az8Ax4H/gTWBqSLAUuAz4EPgK+BFYCPQxWqgA+clR4EzwMu2s66PAGeBx1sK/ATcAjQM+Gsp8C7wDHCn/R04HngXuNz+H5gJfGsp0D5gO/AR8LPtA/ARcBk43W2W/f8DcC3wIXC97XfAJ0C/Ff4aMGeA/4EpgZkSYHXbB8B3wP0mAx8A59T/L/ADgAHAe6A/8CCwFfgb+BOYBHwK/Jp/xP8l8KV/AXf5g8/hK2UAAAAASUVORK5CYII=');
+            --dryer-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGklEQVR4nO1XYWvUYBCdaSpWLGmrReqGVRfcuFAfCuLmVnFhK3XRFb3rX3DoT+AuBHGlK6504aKLtX9BcaEiKogVRRVEUVHBxYsVxVpEtDTS9yb5/k/y3stkkhJO+MB7b2beyU9mJ/nmJiT0P4oB3QBuAJcAmkSmD3gNPAV+Ag8AuwF+J+bw0wBwL4yBAzgG9ANkAFutxX8B3rYc+w+AacBvAEfKzY8Bw1n2G7gL/Gv6A/DMTk7nAJYBvUa0CjgErANGAJ/T/wYwFvjAtrIqAdcCflTAD4G1QBcKYjtwG7gCvALqgGmgwBXAWaBlI/Ah8CswbQnwBzAOnAbmAE+Bb4HtaqUqQO+B2y0Fvgc+A/4EngV+B+YEo1bA0RHgY+BqYH3bWfAocCbwNfAR+BH4CVh3BHgSeA/4DFj/t1b/DNgEHHsRuA1cDfzh9iLwIXC0/Rk5h8BlQJcQ7AAaJ8Nn4FbgE+Au0HlBmA/MgM/At8BvQG5/CvQLnAf+BFYB7QJz4yA7cCOw0hJgG7AQGGqAdQZclY2pBtj8FHgX2Nsm4fD6fK89fWkDWAisA14DlwGdgNcB04AtwC7gE+BuYD0bAFcBm9t9Bfgb+BHYBtwC/AXsR2Bo0wKWAhM2AJ8BPwMbLMQ+BJYBdwEfgS+Bw4D1WAC8BywG+tq9BPgb+BxYDPwGbLaYfAiMAN4DzgK/A68Cp9uLsUuAm9WlfwGfA4cD33sZuBLYA7wK/AmcBgZbCiwGfgO2AW8CV4GPgXeBWcD3gM3A0wBbCsBXYA3QMhF4HLgCeBd4H7gCeB9YUj3uB/YCVwK/Au8A121n3W/ApcB1QGcrhMWA9U0GngA3/wY2Az8Ax4H/gTWBqSLAUuAz4EPgK+BFYCPQxWqgA+clR4EzwMu2s66PAGeBx1sK/ATcAjQM+Gsp8C7wDHCn/R04HngXuNz+H5gJfGsp0D5gO/AR8LPtA/ARcBk43W2W/f8DcC3wIXC97XfAJ0C/Ff4aMGeA/4EpgZkSYHXbB8B3wP0mAx8A59T/L/ADgAHAe6A/8CCwFfgb+BOYBHwK/Jp/xP8l8KV/AXf5g8/hK2UAAAAASUVORK5CYII=');
         }
 
         body {
@@ -69,36 +71,28 @@
         }
 
         .washer {
-            /* This is the top obstacle */
             width: 100%;
-            background-image: var(--washer-img); /* Use background-image for URLs */
-            background-size: contain; /* Ensure the image fits */
-            background-repeat: no-repeat; /* Prevent tiling */
-            background-position: bottom; /* Position the washer at the bottom of its allocated space */
-            border: 0px solid black; /* Remove border if image has its own */
+            background-image: var(--washer-img);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom;
             box-sizing: border-box;
-            /* Placeholder style - remove or adjust if image has its own top/bottom */
-            /* border-bottom: 5px solid #333; */ 
         }
 
         .dryer {
-            /* This is the bottom obstacle */
             width: 100%;
-            background-image: var(--dryer-img); /* Use background-image for URLs */
-            background-size: contain; /* Ensure the image fits */
-            background-repeat: no-repeat; /* Prevent tiling */
-            background-position: top; /* Position the dryer at the top of its allocated space */
-            border: 0px solid black; /* Remove border if image has its own */
+            background-image: var(--dryer-img);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: top;
             box-sizing: border-box;
-             /* Placeholder style - remove or adjust if image has its own top/bottom */
-            /* border-top: 5px solid #333; */
         }
 
         #flames {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 200%; /* Double width for animation */
+            width: 200%; 
             height: 40px;
             background: linear-gradient(90deg, #FF4500, #FFA500, #FF4500, #FFA500, #FF4500);
             background-size: 50% 100%;
@@ -127,7 +121,7 @@
 
         #score {
             position: absolute;
-            top: 90px; /* Below the logo */
+            top: 90px; 
             left: 50%;
             transform: translateX(-50%);
             font-size: 3rem;
@@ -135,7 +129,7 @@
             color: white;
             text-shadow: 2px 2px 4px black;
             z-index: 200;
-            display: none; /* Hidden until game starts */
+            display: none; 
         }
 
         #start-screen, #game-over-screen {
@@ -187,7 +181,7 @@
         }
 
         #game-over-screen {
-            display: none; /* Hidden by default */
+            display: none; 
         }
 
     </style>
@@ -197,13 +191,13 @@
     <div id="game-container">
         
         <div id="start-screen">
-            <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" alt="Daily Nebraskan Logo">
+            <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%C188" alt="Daily Nebraskan Logo">
             <h1>Dryer Fire Dash</h1>
             <p>Help Herbie Husker escape the dryer fire! Click, right-click, or press SPACE to jump and avoid the washers and dryers.</p>
             <button id="start-button">Start Game</button>
         </div>
 
-        <img id="logo" src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" alt="Daily Nebraskan Logo">
+        <img id="logo" src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%C188" alt="Daily Nebraskan Logo">
         <div id="score">0</div>
         <div id="herbie"></div>
         <div id="flames"></div>
@@ -249,7 +243,7 @@
         // --- Game Functions ---
         function startGame() {
             // Reset state
-            herbieY = GAME_HEIGHT / 2;
+            herbieY = GAME_HEIGHT / 3; // Start higher up
             herbieVelocity = 0;
             score = 0;
             obstacles = [];
@@ -269,17 +263,19 @@
 
             // Start game loops
             gameLoop = setInterval(update, 20); // 50 FPS
-            obstacleLoop = setInterval(createObstacle, 2000); // New obstacle every 2 seconds
+            obstacleLoop = setInterval(createObstacle, 2000); 
         }
 
         function update() {
+            if (isGameOver) return; // Stop update if game is over
+
             // 1. Apply physics
             herbieVelocity += GRAVITY;
             herbieY += herbieVelocity;
             herbie.style.top = herbieY + 'px';
 
             // 2. Rotate Herbie based on velocity
-            herbie.style.transform = `rotate(${herbieVelocity * 2}deg)`;
+            herbie.style.transform = `rotate(${Math.min(herbieVelocity * 2, 90)}deg)`; // Cap rotation
 
             // 3. Move obstacles
             moveObstacles();
@@ -303,7 +299,7 @@
             obstaclePair.style.left = GAME_WIDTH + 'px';
             
             // Randomly position the gap
-            const gapTop = Math.random() * (GAME_HEIGHT - GAP_HEIGHT - FLAME_HEIGHT * 2) + (FLAME_HEIGHT * 1.5);
+            const gapTop = Math.random() * (GAME_HEIGHT - GAP_HEIGHT - FLAME_HEIGHT * 2.5) + (FLAME_HEIGHT * 1.5);
             
             const washer = document.createElement('div');
             washer.classList.add('washer');
@@ -348,8 +344,9 @@
         }
 
         function checkCollision() {
-            // Check for ground (flames) and ceiling collision
-            if (herbieY > (GAME_HEIGHT - HERBIE_HEIGHT - FLAME_HEIGHT) || herbieY < 0) {
+            // FIX: Check for ground (flames) collision. 
+            // We use (FLAME_HEIGHT - 10) to give a little buffer so it looks like Herbie is *in* the flames.
+            if (herbieY > (GAME_HEIGHT - HERBIE_HEIGHT - (FLAME_HEIGHT - 10)) || herbieY < 0) {
                 return true;
             }
 
@@ -364,11 +361,18 @@
                 const dryerRect = dryer.getBoundingClientRect();
 
                 // Simple AABB (Axis-Aligned Bounding Box) collision check
-                if (
+                // We check if Herbie's box is overlapping with either the washer or dryer box
+                const collidesWithWasher = 
                     herbieRect.right > washerRect.left &&
                     herbieRect.left < washerRect.right &&
-                    (herbieRect.top < washerRect.bottom || herbieRect.bottom > dryerRect.top)
-                ) {
+                    herbieRect.top < washerRect.bottom;
+
+                const collidesWithDryer = 
+                    herbieRect.right > dryerRect.left &&
+                    herbieRect.left < dryerRect.right &&
+                    herbieRect.bottom > dryerRect.top;
+
+                if (collidesWithWasher || collidesWithDryer) {
                     return true;
                 }
             }
@@ -376,6 +380,7 @@
         }
 
         function endGame() {
+            if (isGameOver) return; // Prevent endGame from running multiple times
             isGameOver = true;
             clearInterval(gameLoop);
             clearInterval(obstacleLoop);
@@ -397,6 +402,7 @@
         // 1. Left Click
         document.addEventListener('mousedown', (e) => {
             if (e.button === 0) { // 0 is the left mouse button
+                if (isGameOver) return; // Don't jump if game is over
                 jump();
             }
         });
@@ -404,12 +410,18 @@
         // 2. Right Click (as requested)
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault(); // Prevents the right-click menu
+            if (isGameOver) return;
             jump();
         });
 
         // 3. Spacebar
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
+                if (isGameOver) {
+                    // Optional: allow spacebar to restart the game
+                    // startGame();
+                    return;
+                }
                 jump();
             }
         });
