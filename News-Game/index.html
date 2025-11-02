@@ -3,410 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Nebraskan - Dryer Fire Dash (TEST)</title>
+    <title>Daily Nebraskan: Dryer Fire</title>
     <style>
-        /* CSS Variables for easy customization */
-        :root {
-            --game-width: 400px;
-            --game-height: 600px;
-            --herbie-width: 70px; 
-            --herbie-height: 58px;
-            --obstacle-width: 80px;
-            --gap-height: 160px;
-            --game-speed: 2px;
-            --gravity: 0.3;
-            --jump-force: -7;
-
-            /* Embedded Images (These are working) */
-            --herbie-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQcAAAD7AQMAAAD+yYHcAAAABlBMVEVHcEz///+flZ4gAAAAAXRSTlMAQObYZgAAAZpJREFUeJzt2bFpAjEUhvFNpYVOQoEOCoJdBLvYxSnYxSn4Uk7A4iJYBAUpToJDJx2EgoOCg4Pg0sFBQULs9+bZ3pBFuJj33vt9R5Kk/+18/w+fYj+k/+73H/7gN/2h/+r43f+H7/5T/7vT2wMAAAAAAAAAAAAAAAAAAAAAgG98D/8qS9/f331L/p+fn1z+9fP/F//362f/N/7v18/+/V38f/N//+p3X1//8p+L/6l/wB/g2wAAAAAASJlfJcng37v/R+a5BIAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgAmQJqAJkCagCZAmgA/wE/APMkdqfJg5xXAAAAAElFTkSuQmCC');
-            --washer-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGklEQVR4nO1XYWvUYBCdaSpWLGmrReqGVRfcuFAfCuLmVnFhK3XRFb3rX3DoT+AuBHGlK6504aKLtX9BcaEiKogVRRVEUVHBxYsVxVpEtDTS9yb5/k/y3stkkhJO+MB7b2beyU9mJ/nmJiT0P4oB3QBuAJcAmkSmD3gNPAV+Ag8AuwF+J+bw0wBwL4yBAzgG9ANkAFutxX8B3rYc+w+AacBvAEfKzY8Bw1n2G7gL/Gv6A/DMTk7nAJYBvUa0CjgErANGAJ/T/wYwFvjAtrIqAdcCflTAD4G1QBcKYjtwG7gCvALqgGmgwBXAWaBlI/Ah8CswbQnwBzAOnAbmAE+Bb4HtaqUqQO+B2y0Fvgc+A/4EngV+B+YEo1bA0RHgY+BqYH3bWfAocCbwNfAR+BH4CVh3BHgSeA/4DFj/t1b/DNgEHHsRuA1cDfzh9iLwIXC0/Rk5h8BlQJcQ7AAaJ8Nn4FbgE+Au0HlBmA/MgM/At8BvQG5/CvQLnAf+BFYB7QJz4yA7cCOw0hJgG7AQGGqAdQZclY2pBtj8FHgX2Nsm4fD6fK89fWkDWAisA14DlwGdgNcB04AtwC7gE+BuYD0bAFcBm9t9Bfgb+BHYBtwC/AXsR2Bo0wKWAhM2AJ8BPwMbLMQ+BJYBdwEfgS+Bw4D1WAC8BywG+tq9BPgb+BxYDPwGbLaYfAiMAN4DzgK/A68Cp9uLsUuAm9WlfwGfA4cD33sZuBLYA7wK/AmcBgZbCiwGfgO2AW8CV4GPgXeBWcD3gM3A0wBbCsBXYA3QMhF4HLgCeBd4H7gCeB9YUj3uB/YCVwK/Au8A121n3W/ApcB1QGcrhMWA9U0GngA3/wY2Az8Ax4H/gTWBqSLAUuAz4EPgK+BFYCPQxWqgA+clR4EzwMu2s66PAGeBx1sK/ATcAjQM+Gsp8C7wDHCn/R04HngXuNz+H5gJfGsp0D5gO/AR8LPtA/ARcBk43W2W/f8DcC3wIXC97XfAJ0C/Ff4aMGeA/4EpgZkSYHXbB8B3wP0mAx8A59T/L/ADgAHAe6A/8CCwFfgb+BOYBHwK/Jp/xP8l8KV/AXf5g8/hK2UAAAAASUVORK5CYII=');
-            --dryer-img: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGklEQVR4nO1XYWvUYBCdaSpWLGmrReqGVRfcuFAfCuLmVnFhK3XRFb3rX3DoT+AuBHGlK6504aKLtX9BcaEiKogVRRVEUVHBxYsVxVpEtDTS9yb5/k/y3stkkhJO+MB7b2beyU9mJ/nmJiT0P4oB3QBuAJcAmkSmD3gNPAV+Ag8AuwF+J+bw0wBwL4yBAzgG9ANkAFutxX8B3rYc+w+AacBvAEfKzY8Bw1n2G7gL/Gv6A/DMTk7nAJYBvUa0CjgErANGAJ/T/wYwFvjAtrIqAdcCflTAD4G1QBcKYjtwG7gCvALqgGmgwBXAWaBlI/Ah8CswbQnwBzAOnAbmAE+Bb4HtaqUqQO+B2y0Fvgc+A/4EngV+B+YEo1bA0RHgY+BqYH3bWfAocCbwNfAR+BH4CVh3BHgSeA/4DFj/t1b/DNgEHHsRuA1cDfzh9iLwIXC0/Rk5h8BlQJcQ7AAaJ8Nn4FbgE+Au0HlBmA/MgM/At8BvQG5/CvQLnAf+BFYB7QJz4yA7cCOw0hJgG7AQGGqAdQZclY2pBtj8FHgX2Nsm4fD6fK89fWkDWAisA14DlwGdgNcB04AtwC7gE+BuYD0bAFcBm9t9Bfgb+BHYBtwC/AXsR2Bo0wKWAhM2AJ8BPwMbLMQ+BJYBdwEfgS+Bw4D1WAC8BywG+tq9BPgb+BxYDPwGbLaYfAiMAN4DzgK/A68Cp9uLsUuAm9WlfwGfA4cD33sZuBLYA7wK/AmcBgZbCiwGfgO2AW8CV4GPgXeBWcD3gM3A0wBbCsBXYA3QMhF4HLgCeBd4H7gCeB9YUj3uB/YCVwK/Au8A121n3W/ApcB1QGcrhMWA9U0GngA3/wY2Az8Ax4H/gTWBqSLAUuAz4EPgK+BFYCPQxWqgA+clR4EzwMu2s66PAGeBx1sK/ATcAjQM+Gsp8C7wDHCn/R04HngXuNz+H5gJfGsp0D5gO/AR8LPtA/ARcBk43W2W/f8DcC3wIXC97XfAJ0C/Ff4aMGeA/4EpgZkSYHXbB8B3wP0mAx8A59T/L/ADgAHAe6A/8CCwFfgb+BOYBHwK/Jp/xP8l8KV/AXf5g8/hK2UAAAAASUVORK5CYII=');
-        }
-
+        /* Basic page styling */
         body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #333;
+            background-color: #f0f0f0;
+            color: #333;
         }
 
+        h1 {
+            font-size: 1.5rem;
+            color: #d90000; /* Daily Nebraskan Red */
+        }
+
+        /* The main game container */
         #game-container {
-            width: var(--game-width);
-            height: var(--game-height);
             position: relative;
-            overflow: hidden;
-            border: 2px solid black;
-            /* TEST: Using a simple color background */
-            background-color: #4c98d4; 
+            width: 400px;
+            height: 600px;
+            border: 3px solid #000;
+            background-color: #70c5ce; /* Sky Blue */
+            overflow: hidden; /* Keeps everything inside */
         }
 
-        #herbie {
-            width: var(--herbie-width);
-            height: var(--herbie-height);
-            position: absolute;
-            top: 50%;
-            left: 25%;
-            background-image: var(--herbie-img);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            z-index: 100;
-            transition: transform 0.2s;
-        }
-
-        .obstacle-pair {
-            position: absolute;
-            width: var(--obstacle-width);
+        /* The game canvas is where we draw the game */
+        #game-canvas {
+            width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            z-index: 10;
         }
 
-        .washer {
-            width: 100%;
-            background-image: var(--washer-img);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: bottom;
-            box-sizing: border-box;
-        }
-
-        .dryer {
-            width: 100%;
-            background-image: var(--dryer-img);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: top;
-            box-sizing: border-box;
-        }
-
-        #flames {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%; 
-            height: 40px;
-            background: linear-gradient(90deg, #FF4500, #FFA500, #FF4500, #FFA500, #FF4500);
-            background-size: 50% 100%;
-            z-index: 101;
-            animation: moveFlames 2s linear infinite;
-        }
-
-        @keyframes moveFlames {
-            0% {
-                background-position: 0% 0%;
-            }
-            100% {
-                background-position: 100% 0%;
-            }
-        }
-
-        /* TEST: Logo temporarily hidden */
-        #logo {
-            display: none; 
-        }
-
-        #score {
-            position: absolute;
-            top: 20px; /* Moved up since logo is gone */
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 4px black;
-            z-index: 200;
-            display: none; 
-        }
-
+        /* Start screen and Game Over screen styling */
         #start-screen, #game-over-screen {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
+            background-color: rgba(255, 255, 255, 0.85);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            z-index: 300;
+            z-index: 10;
             padding: 20px;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Ensures padding doesn't break layout */
         }
 
-        /* TEST: Logo temporarily hidden on start screen */
-        #start-screen img {
+        /* Hide the game-over screen initially */
+        #game-over-screen {
             display: none;
         }
 
-        #start-screen h1 {
-            margin-top: 0;
+        .logo {
+            width: 90%;
+            max-width: 350px;
+            margin-bottom: 20px;
         }
 
-        #start-screen p {
+        .instructions {
             font-size: 1.1rem;
-            max-width: 300px;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
-        button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
+        .start-button {
+            font-size: 1.5rem;
             font-weight: bold;
-            color: black;
-            background-color: #f0f0f0;
-            border: 2px solid black;
+            padding: 15px 30px;
+            background-color: #d90000; /* DN Red */
+            color: white;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            box-shadow: 0 4px #8c0000; /* 3D effect */
+            transition: all 0.1s ease;
         }
 
-        button:hover {
-            background-color: #ddd;
+        .start-button:active {
+            box-shadow: 0 2px #8c0000;
+            transform: translateY(2px);
         }
 
-        #game-over-screen {
-            display: none; 
+        /* Score display during the game */
+        #score-display {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            z-index: 5;
+            -webkit-text-stroke: 2px black; /* Outline for visibility */
+            text-stroke: 2px black;
+            display: none; /* Hidden until game starts */
         }
 
     </style>
 </head>
 <body>
 
+    <h1>Dryer Fire Flapper</h1>
+
     <div id="game-container">
         
         <div id="start-screen">
-            <h1>Dryer Fire Dash</h1>
-            <p>Help Herbie Husker escape the dryer fire! Click, right-click, or press SPACE to jump and avoid the washers and dryers.</p>
-            <button id="start-button">Start Game</button>
+            <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" 
+                 alt="Daily Nebraskan Logo" class="logo">
+            
+            <p class="instructions">
+                A dryer fire is breaking out! <br>
+                Click your mouse to navigate through the dryers and avoid the fire below.
+            </p>
+            
+            <button id="start-button" class="start-button">START GAME</button>
         </div>
-
-        <div id="score">0</div>
-        <div id="herbie"></div>
-        <div id="flames"></div>
 
         <div id="game-over-screen">
-            <h1>Game Over</h1>
-            <h2 id="final-score"></h2>
-            <button id="retry-button">Try Again</button>
+            <img src="https://bloximages.newyork1.vip.townnews.com/dailynebraskan.com/content/tncms/custom/image/7977647a-bd51-11ed-9a1b-271c59e332ff.png?resize=1200%2C188" 
+                 alt="Daily Nebraskan Logo" class="logo">
+            
+            <h2>GAME OVER</h2>
+            <p id="final-score" class="instructions">Your Score: 0</p>
+            
+            <button id="restart-button" class="start-button">TRY AGAIN</button>
         </div>
+
+        <div id="score-display">0</div>
+
+        <canvas id="game-canvas"></canvas>
 
     </div>
 
     <script>
-        // --- Get DOM Elements ---
-        const gameContainer = document.getElementById('game-container');
-        const herbie = document.getElementById('herbie');
-        const flames = document.getElementById('flames');
-        const scoreDisplay = document.getElementById('score');
+        // === 1. GET HTML ELEMENTS ===
+        const canvas = document.getElementById('game-canvas');
+        const context = canvas.getContext('2d');
+        
+        // Get UI Screens and Buttons
         const startScreen = document.getElementById('start-screen');
         const gameOverScreen = document.getElementById('game-over-screen');
         const startButton = document.getElementById('start-button');
-        const retryButton = document.getElementById('retry-button');
+        const restartButton = document.getElementById('restart-button');
+        
+        // Get Score Displays
+        const scoreDisplay = document.getElementById('score-display');
         const finalScoreDisplay = document.getElementById('final-score');
-        // const logo = document.getElementById('logo'); // No longer needed for test
 
-        // --- Get CSS Variables ---
-        const style = getComputedStyle(document.documentElement);
-        const GAME_HEIGHT = parseInt(style.getPropertyValue('--game-height'));
-        const GAME_WIDTH = parseInt(style.getPropertyValue('--game-width'));
-        const HERBIE_HEIGHT = parseInt(style.getPropertyValue('--herbie-height'));
-        const HERBIE_WIDTH = parseInt(style.getPropertyValue('--herbie-width'));
-        const OBSTACLE_WIDTH = parseInt(style.getPropertyValue('--obstacle-width'));
-        const GAP_HEIGHT = parseInt(style.getPropertyValue('--gap-height'));
-        const GAME_SPEED = parseFloat(style.getPropertyValue('--game-speed'));
-        const GRAVITY = parseFloat(style.getPropertyValue('--gravity'));
-        const JUMP_FORCE = parseFloat(style.getPropertyValue('--jump-force'));
-        const FLAME_HEIGHT = flames.offsetHeight;
+        // Set Canvas dimensions
+        canvas.width = 400;
+        canvas.height = 600;
 
-        // --- Game State ---
-        let herbieY, herbieVelocity, score, gameLoop, obstacleLoop, isGameOver;
+        // === 2. GAME VARIABLES ===
+        let player;
         let obstacles = [];
+        let score = 0;
+        let gameSpeed = 2;
+        let gravity = 0.3;
+        let lift = -6; // How high the player "flaps"
+        let frame = 0; // Frame counter to spawn obstacles
+        let isGameStarted = false;
+        let isGameOver = false;
 
-        // --- Game Functions ---
-        function startGame() {
-            // Reset state
-            herbieY = GAME_HEIGHT / 3; // Start higher up
-            herbieVelocity = 0;
-            score = 0;
-            obstacles = [];
-            isGameOver = false;
+        // Ground Height
+        const fireGroundHeight = 60;
 
-            // Clear any existing obstacles
-            document.querySelectorAll('.obstacle-pair').forEach(obs => obs.remove());
-            
-            // Setup UI
-            herbie.style.top = herbieY + 'px';
-            herbie.style.transform = 'rotate(0deg)';
-            scoreDisplay.textContent = '0';
-            scoreDisplay.style.display = 'block';
-            // logo.style.display = 'block'; // Logo hidden
-            startScreen.style.display = 'none';
-            gameOverScreen.style.display = 'none';
+        // === 3. PLAYER OBJECT ===
+        // We'll just use a simple rectangle for the player
+        // A red square could represent the "breaking news element"
+        class Player {
+            constructor() {
+                this.x = 80;
+                this.y = canvas.height / 2;
+                this.width = 30;
+                this.height = 30;
+                this.velocity = 0;
+            }
 
-            // Start game loops
-            gameLoop = setInterval(update, 20); // 50 FPS
-            obstacleLoop = setInterval(createObstacle, 2000); 
-        }
+            // Draw the player
+            draw() {
+                context.fillStyle = '#d90000'; // DN Red
+                context.fillRect(this.x, this.y, this.width, this.height);
+                context.strokeStyle = '#000'; // Black outline
+                context.strokeRect(this.x, this.y, this.width, this.height);
+            }
 
-        function update() {
-            if (isGameOver) return; // Stop update if game is over
+            // Update player's position
+            update() {
+                this.velocity += gravity;
+                this.y += this.velocity;
 
-            // 1. Apply physics
-            herbieVelocity += GRAVITY;
-            herbieY += herbieVelocity;
-            herbie.style.top = herbieY + 'px';
+                // Stop player from falling off the top
+                if (this.y < 0) {
+                    this.y = 0;
+                    this.velocity = 0;
+                }
 
-            // 2. Rotate Herbie based on velocity
-            herbie.style.transform = `rotate(${Math.min(herbieVelocity * 2, 90)}deg)`; // Cap rotation
+                // Check for collision with the fire ground
+                if (this.y + this.height > canvas.height - fireGroundHeight) {
+                    this.y = canvas.height - fireGroundHeight - this.height;
+                    this.velocity = 0;
+                    endGame();
+                }
+            }
 
-            // 3. Move obstacles
-            moveObstacles();
-
-            // 4. Check for collisions
-            if (checkCollision()) {
-                endGame();
+            // Flap function
+            flap() {
+                this.velocity = lift;
             }
         }
 
-        function jump() {
-            if (isGameOver) return;
-            herbieVelocity = JUMP_FORCE;
-        }
+        // === 4. OBSTACLE (DRYER) OBJECT ===
+        class Obstacle {
+            constructor() {
+                this.width = 70; // Width of the dryer obstacle
+                this.gap = 200; // Gap for the player to fly through
+                
+                // Randomly position the gap
+                this.topHeight = Math.random() * (canvas.height - this.gap - fireGroundHeight - 50) + 20; // 20px padding from top
+                this.bottomHeight = canvas.height - this.topHeight - this.gap;
 
-        function createObstacle() {
-            if (isGameOver) return;
-            
-            const obstaclePair = document.createElement('div');
-            obstaclePair.classList.add('obstacle-pair');
-            obstaclePair.style.left = GAME_WIDTH + 'px';
-            
-            // Randomly position the gap
-            const gapTop = Math.random() * (GAME_HEIGHT - GAP_HEIGHT - FLAME_HEIGHT * 2.5) + (FLAME_HEIGHT * 1.5);
-            
-            const washer = document.createElement('div');
-            washer.classList.add('washer');
-            washer.style.height = gapTop + 'px';
-            
-            const dryer = document.createElement('div');
-            dryer.classList.add('dryer');
-            dryer.style.height = (GAME_HEIGHT - gapTop - GAP_HEIGHT) + 'px';
+                this.x = canvas.width; // Start off-screen
+                this.color = '#AAAAAA'; // Gray for the dryer
+                this.borderColor = '#444444';
+                this.passed = false; // To track score
+            }
 
-            obstaclePair.appendChild(washer);
-            obstaclePair.appendChild(dryer);
-            
-            gameContainer.appendChild(obstaclePair);
-            obstacles.push(obstaclePair);
-        }
+            // Draw the dryer
+            draw() {
+                context.fillStyle = this.color;
+                context.strokeStyle = this.borderColor;
+                context.lineWidth = 3;
+                
+                // Draw top dryer
+                context.fillRect(this.x, 0, this.width, this.topHeight);
+                context.strokeRect(this.x, 0, this.width, this.topHeight);
+                
+                // Draw bottom dryer
+                context.fillRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
+                context.strokeRect(this.x, canvas.height - this.bottomHeight, this.width, this.bottomHeight);
+            }
 
-        function moveObstacles() {
-            let passedObstacle = false;
-            obstacles.forEach(obstacle => {
-                let obstacleLeft = parseFloat(obstacle.style.left);
-                obstacleLeft -= GAME_SPEED;
-                obstacle.style.left = obstacleLeft + 'px';
+            // Move the dryer to the left
+            update() {
+                this.x -= gameSpeed;
 
-                // Check for score
-                if (!obstacle.passed && obstacleLeft < (GAME_WIDTH / 4 - OBSTACLE_WIDTH)) {
-                    obstacle.passed = true;
+                // Check if player passed the obstacle
+                if (!this.passed && this.x + this.width < player.x) {
                     score++;
                     scoreDisplay.textContent = score;
+                    this.passed = true;
                 }
 
-                // Remove obstacle if it's off-screen
-                if (obstacleLeft < -OBSTACLE_WIDTH) {
-                    obstacle.remove();
-                    passedObstacle = true;
-                }
-            });
-
-            // Clean up the obstacles array
-            if (passedObstacle) {
-                obstacles = obstacles.filter(obs => parseFloat(obs.style.left) >= -OBSTACLE_WIDTH);
-            }
-        }
-
-        function checkCollision() {
-            // Check for ground (flames) collision. 
-            if (herbieY > (GAME_HEIGHT - HERBIE_HEIGHT - (FLAME_HEIGHT - 10)) || herbieY < 0) {
-                return true;
+                // Check for collision
+                this.checkCollision();
             }
 
-            // Check for obstacle collision
-            const herbieRect = herbie.getBoundingClientRect();
-            
-            for (let obstacle of obstacles) {
-                const washer = obstacle.children[0];
-                const dryer = obstacle.children[1];
+            checkCollision() {
+                const playerRect = { x: player.x, y: player.y, width: player.width, height: player.height };
                 
-                const washerRect = washer.getBoundingClientRect();
-                const dryerRect = dryer.getBoundingClientRect();
+                // Define the top and bottom dryer rectangles
+                const topRect = { x: this.x, y: 0, width: this.width, height: this.topHeight };
+                const bottomRect = { x: this.x, y: canvas.height - this.bottomHeight, width: this.width, height: this.bottomHeight };
 
-                const collidesWithWasher = 
-                    herbieRect.right > washerRect.left &&
-                    herbieRect.left < washerRect.right &&
-                    herbieRect.top < washerRect.bottom;
-
-                const collidesWithDryer = 
-                    herbieRect.right > dryerRect.left &&
-                    herbieRect.left < dryerRect.right &&
-                    herbieRect.bottom > dryerRect.top;
-
-                if (collidesWithWasher || collidesWithDryer) {
-                    return true;
+                // AABB Collision Check
+                if (
+                    playerRect.x < topRect.x + topRect.width &&
+                    playerRect.x + playerRect.width > topRect.x &&
+                    playerRect.y < topRect.y + topRect.height &&
+                    playerRect.y + playerRect.height > topRect.y
+                ) {
+                    endGame(); // Collision with top dryer
+                }
+                
+                if (
+                    playerRect.x < bottomRect.x + bottomRect.width &&
+                    playerRect.x + playerRect.width > bottomRect.x &&
+                    playerRect.y < bottomRect.y + bottomRect.height &&
+                    playerRect.y + playerRect.height > bottomRect.y
+                ) {
+                    endGame(); // Collision with bottom dryer
                 }
             }
-            return false;
         }
 
-        function endGame() {
-            if (isGameOver) return; 
-            isGameOver = true;
-            clearInterval(gameLoop);
-            clearInterval(obstacleLoop);
+        // === 5. GAME HELPER FUNCTIONS ===
+        
+        // Function to draw the "fire" ground
+        function drawFireGround() {
+            context.fillStyle = '#FF4500'; // Orange-Red for fire
+            context.fillRect(0, canvas.height - fireGroundHeight, canvas.width, fireGroundHeight);
             
-            finalScoreDisplay.textContent = `Final Score: ${score}`;
-            gameOverScreen.style.display = 'flex';
-            // logo.style.display = 'none'; // Logo hidden
-            scoreDisplay.style.display = 'none';
+            // Add some "flame" effects
+            context.fillStyle = '#FFD700'; // Yellow for flames
+            for (let i = 0; i < canvas.width; i += 10) {
+                let flameHeight = Math.random() * 20 + 10;
+                context.fillRect(i, canvas.height - fireGroundHeight - flameHeight + 10, 8, flameHeight);
+            }
         }
 
-        // --- Event Listeners ---
-        
-        startButton.addEventListener('click', startGame);
-        retryButton.addEventListener('click', startGame);
-
-        // --- Controls ---
-        
-        document.addEventListener('mousedown', (e) => {
-            if (e.button === 0) { // 0 is the left mouse button
-                if (isGameOver) return;
-                jump();
+        // Function to handle obstacle spawning
+        function handleObstacles() {
+            // Spawn a new obstacle every 150 frames
+            if (frame % 150 === 0) {
+                obstacles.push(new Obstacle());
             }
-        });
 
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault(); 
-            if (isGameOver) return;
-            jump();
-        });
+            // Update and draw all obstacles
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].update();
+                obstacles[i].draw();
 
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                if (isGameOver) {
-                    return;
+                // Remove obstacles that are off-screen
+                if (obstacles[i].x + obstacles[i].width < 0) {
+                    obstacles.splice(i, 1);
                 }
-                jump();
             }
+        }
+
+        // Function to reset all game variables
+        function resetGame() {
+            player = new Player();
+            obstacles = [];
+            score = 0;
+            frame = 0;
+            isGameOver = false;
+            isGameStarted = true;
+            
+            // Reset UI
+            scoreDisplay.textContent = score;
+            scoreDisplay.style.display = 'block';
+            gameOverScreen.style.display = 'none';
+            startScreen.style.display = 'none';
+        }
+
+        // Function to start the game
+        function startGame() {
+            resetGame();
+            gameLoop(); // Start the animation loop
+        }
+
+        // Function to end the game
+        function endGame() {
+            if (isGameOver) return; // Don't run twice
+            isGameOver = true;
+            isGameStarted = false;
+            
+            // Show game over screen
+            scoreDisplay.style.display = 'none';
+            finalScoreDisplay.textContent = `Your Score: ${score}`;
+            gameOverScreen.style.display = 'flex';
+        }
+
+        // === 6. THE MAIN GAME LOOP ===
+        function gameLoop() {
+            if (isGameOver) return; // Stop the loop if game is over
+
+            // Clear the canvas every frame
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the fire ground
+            drawFireGround();
+            
+            // Update and draw obstacles
+            handleObstacles();
+
+            // Update and draw the player
+            player.update();
+            player.draw();
+
+            // Increment frame counter
+            frame++;
+
+            // Continue the loop
+            requestAnimationFrame(gameLoop);
+        }
+
+        // === 7. EVENT LISTENERS ===
+        
+        // Listen for mouse click to "flap"
+        window.addEventListener('mousedown', () => {
+            if (isGameStarted) {
+                player.flap();
+            }
+        });
+
+        // Listen for Start Button click
+        startButton.addEventListener('click', () => {
+            startGame();
+        });
+
+        // Listen for Restart Button click
+        restartButton.addEventListener('click', () => {
+            startGame();
         });
 
     </script>
+
 </body>
 </html>
