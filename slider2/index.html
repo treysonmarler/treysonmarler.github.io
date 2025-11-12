@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNL School of Music Changes</title>
+    <style>
+        /* Basic Reset and Font */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Container for text content */
+        header {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #d00000; /* UNL Red-ish */
+        }
+
+        p.instructions {
+            font-size: 0.9rem;
+            color: #666;
+            background: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* The Image Slider Container */
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Max width for desktop */
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            /* This ensures the container takes the height of the image */
+            line-height: 0; 
+        }
+
+        /* The Images */
+        .img-wrapper {
+            width: 100%;
+            /* The background image (2025) dictates the height */
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            pointer-events: none; /* Prevents dragging the image itself */
+            user-select: none;
+        }
+
+        /* The Overlay Image (2014) */
+        .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%; /* Start at 50% */
+            overflow: hidden;
+            border-right: 2px solid #fff; /* The white dividing line */
+            z-index: 10;
+        }
+
+        /* Inner image needs to be fixed width to prevent squishing */
+        .img-overlay img {
+            width: 100vw; /* Fallback */
+            max-width: 800px; /* Must match the container max-width */
+            height: auto;
+        }
+        
+        /* Responsive fix: On smaller screens, the inner image needs to match current container width */
+        @media (max-width: 800px) {
+            .img-overlay img {
+                width: 100vw; 
+            }
+        }
+
+        /* The Slider Input (Range) */
+        .slider {
+            position: absolute;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: transparent;
+            outline: none;
+            margin: 0;
+            z-index: 20; /* On top of everything */
+            cursor: ew-resize; /* East-West resize cursor */
+        }
+
+        /* Slider Thumb (The Handle) - Chrome/Safari */
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            background: #d00000;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8L22 12L18 16'%3E%3C/path%3E%3Cpath d='M6 8L2 12L6 16'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            cursor: ew-resize;
+        }
+
+        /* Slider Thumb (The Handle) - Firefox */
+        .slider::-moz-range-thumb {
+            width: 40px;
+            height: 40px;
+            background: #d00000;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8L22 12L18 16'%3E%3C/path%3E%3Cpath d='M6 8L2 12L6 16'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            cursor: ew-resize;
+        }
+
+        /* Labels */
+        .label {
+            position: absolute;
+            top: 10px;
+            color: white;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 15;
+        }
+        .label-before { left: 10px; }
+        .label-after { right: 10px; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Check out the changes to UNL's School of Music from 2014-2025.</h1>
+        <p class="instructions">Drag the slider left and right to compare.</p>
+    </header>
+
+    <div class="container" id="comparison-container">
+        <div class="img-wrapper">
+            <img src="campusmarch2025.jpg" alt="UNL Campus March 2025">
+            <span class="label label-after">March 2025</span>
+        </div>
+
+        <div class="img-overlay" id="overlay">
+            <img src="campusoctober2014.jpg" alt="UNL Campus October 2014" id="overlay-img">
+            <span class="label label-before">Oct 2014</span>
+        </div>
+
+        <input type="range" min="0" max="100" value="50" class="slider" id="slider">
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const overlay = document.getElementById('overlay');
+        const overlayImg = document.getElementById('overlay-img');
+        const container = document.getElementById('comparison-container');
+
+        function updateSlider() {
+            // 1. Get the slider value (0-100)
+            const sliderValue = slider.value;
+            
+            // 2. Change the width of the overlay container to reveal/hide image
+            overlay.style.width = sliderValue + "%";
+        }
+
+        function updateImageWidth() {
+            // This function ensures the inner overlay image stays the same physical size
+            // as the container, even when the container is resizing on mobile.
+            // This prevents the "squishing" effect.
+            const containerWidth = container.offsetWidth;
+            overlayImg.style.width = containerWidth + 'px';
+        }
+
+        // Event Listeners
+        slider.addEventListener('input', updateSlider);
+        window.addEventListener('resize', updateImageWidth);
+        
+        // Initialize
+        updateSlider();
+        updateImageWidth(); // Run once on load to set correct width
+    </script>
+</body>
+</html>
