@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNL Temple Building Comparison</title>
+    
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* The main comparison container */
+        .comparison-container {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* This clips the images to the rounded corners */
+        }
+
+        /* The "before" image (base layer) */
+        .comparison-container .img-before {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* The "after" image wrapper. This is what moves. */
+        .img-after-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%; /* Default starting position */
+            height: 100%;
+            overflow: hidden; /* This is the "magic" that clips the top image */
+        }
+
+        /* The "after" image itself. JS will set its width to match the container. */
+        .comparison-container .img-after {
+            display: block;
+            height: auto;
+            /* Width will be set by JavaScript to match the container's width */
+        }
+
+        /* The slider handle */
+        .slider-line {
+            position: absolute;
+            top: 0;
+            left: 50%; /* Default starting position */
+            width: 4px;
+            height: 100%;
+            background-color: white;
+            cursor: ew-resize; /* East-West resize cursor */
+            transform: translateX(-50%); /* Center the line */
