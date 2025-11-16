@@ -103,17 +103,18 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        // THIS IS THE NEW PART:
+        // We use window.onload to make 100% sure the page (including images)
+        // is loaded before we try to find any elements.
+        window.onload = function() {
+            
             // Select all the necessary elements
             const slider = document.getElementById("comparison-slider");
             const afterWrapper = document.getElementById("img-after-wrapper");
             const beforeImg = document.getElementById("img-before");
             const afterImg = document.getElementById("img-after");
 
-            // --- Core Functions ---
-
             // Function to set the "after" image's width to match the "before" image
-            // This ensures they are scaled identically.
             function setAfterImageWidth() {
                 let containerWidth = beforeImg.offsetWidth;
                 afterImg.style.width = containerWidth + "px";
@@ -127,4 +128,13 @@
 
             // Listen for any movement on the slider
             slider.addEventListener("input", function() {
-                // Get the slider
+                // Get the slider's current value (0-100)
+                let value = this.value;
+                // Set the width of the "after" wrapper to match
+                afterWrapper.style.width = value + "%";
+            });
+        };
+    </script>
+
+</body>
+</html>
